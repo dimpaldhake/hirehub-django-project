@@ -1,0 +1,565 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Post a Job | HireHub
+{% endblock %}
+
+{% block content %}
+
+<section class="job-form-page">
+
+    <div class="container">
+
+        <!-- BACK -->
+
+        <div class="job-form-back">
+
+            <a href="{% url 'job_list' %}">
+                <i class="bi bi-arrow-left"></i>
+                Back to Jobs
+            </a>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <!-- ================= FORM ================= -->
+
+            <div class="col-lg-8">
+
+                <div class="job-form-card">
+
+                    <div class="job-form-heading">
+
+                        <span class="section-label">
+                            RECRUITER PANEL
+                        </span>
+
+                        <h1>
+                            Post a new
+                            <span class="gradient-text">opportunity.</span>
+                        </h1>
+
+                        <p>
+                            Share your job opening and connect
+                            with candidates who match your needs.
+                        </p>
+
+                    </div>
+
+                    {% if form.non_field_errors %}
+                    <div class="form-error-box">
+                        <i class="bi bi-exclamation-circle"></i>
+
+                        <div>
+                            {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    <form method="POST" class="job-create-form">
+
+                        {% csrf_token %}
+
+
+                        <!-- ================= BASIC INFO ================= -->
+
+                        <div class="job-form-section">
+
+                            <div class="job-form-section-title">
+
+                                <div class="job-form-section-icon">
+                                    <i class="bi bi-briefcase"></i>
+                                </div>
+
+                                <div>
+                                    <h2>Job Information</h2>
+                                    <p>
+                                        Start with the basic details
+                                        of your position.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row g-3">
+
+                                <!-- CATEGORY -->
+
+                                <div class="col-md-6">
+
+                                    <div class="job-form-field">
+
+                                        <label for="{{ form.category.id_for_label }}">
+                                            Category
+                                        </label>
+
+                                        {{ form.category }}
+
+                                        {% if form.category.errors %}
+                                        <div class="job-form-error">
+                                            {{ form.category.errors|striptags }}
+                                        </div>
+                                        {% endif %}
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- JOB TYPE -->
+
+                                <div class="col-md-6">
+
+                                    <div class="job-form-field">
+
+                                        <label for="{{ form.job_type.id_for_label }}">
+                                            Job Type
+                                            <span>*</span>
+                                        </label>
+
+                                        {{ form.job_type }}
+
+                                        {% if form.job_type.errors %}
+                                        <div class="job-form-error">
+                                            {{ form.job_type.errors|striptags }}
+                                        </div>
+                                        {% endif %}
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- TITLE -->
+
+                                <div class="col-12">
+
+                                    <div class="job-form-field">
+
+                                        <label for="{{ form.title.id_for_label }}">
+                                            Job Title
+                                            <span>*</span>
+                                        </label>
+
+                                        {{ form.title }}
+
+                                        {% if form.title.errors %}
+                                        <div class="job-form-error">
+                                            {{ form.title.errors|striptags }}
+                                        </div>
+                                        {% endif %}
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- LOCATION -->
+
+                                <div class="col-md-6">
+
+                                    <div class="job-form-field">
+
+                                        <label for="{{ form.location.id_for_label }}">
+                                            Location
+                                            <span>*</span>
+                                        </label>
+
+                                        {{ form.location }}
+
+                                        {% if form.location.errors %}
+                                        <div class="job-form-error">
+                                            {{ form.location.errors|striptags }}
+                                        </div>
+                                        {% endif %}
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- EXPERIENCE -->
+
+                                <div class="col-md-6">
+
+                                    <div class="job-form-field">
+
+                                        <label for="{{ form.experience.id_for_label }}">
+                                            Experience
+                                            <span>*</span>
+                                        </label>
+
+                                        <div class="input-with-suffix">
+
+                                            {{ form.experience }}
+
+                                            <span>
+                                                years
+                                            </span>
+
+                                        </div>
+
+                                        {% if form.experience.errors %}
+                                        <div class="job-form-error">
+                                            {{ form.experience.errors|striptags }}
+                                        </div>
+                                        {% endif %}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= DESCRIPTION ================= -->
+
+                        <div class="job-form-section">
+
+                            <div class="job-form-section-title">
+
+                                <div class="job-form-section-icon">
+                                    <i class="bi bi-file-text"></i>
+                                </div>
+
+                                <div>
+                                    <h2>Job Description</h2>
+                                    <p>
+                                        Explain the role and what
+                                        the candidate will be doing.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="job-form-field">
+
+                                <label for="{{ form.description.id_for_label }}">
+                                    Description
+                                    <span>*</span>
+                                </label>
+
+                                {{ form.description }}
+
+                                {% if form.description.errors %}
+                                <div class="job-form-error">
+                                    {{ form.description.errors|striptags }}
+                                </div>
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= COMPENSATION ================= -->
+
+                        <div class="job-form-section">
+
+                            <div class="job-form-section-title">
+
+                                <div class="job-form-section-icon">
+                                    <i class="bi bi-cash-stack"></i>
+                                </div>
+
+                                <div>
+                                    <h2>Compensation</h2>
+                                    <p>
+                                        Add the expected salary range
+                                        for this position.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row g-3">
+
+                                <div class="col-md-6">
+
+                                    <div class="job-form-field">
+
+                                        <label for="{{ form.salary_min.id_for_label }}">
+                                            Minimum Salary
+                                        </label>
+
+                                        <div class="salary-input">
+
+                                            <span>₹</span>
+
+                                            {{ form.salary_min }}
+
+                                        </div>
+
+                                        {% if form.salary_min.errors %}
+                                        <div class="job-form-error">
+                                            {{ form.salary_min.errors|striptags }}
+                                        </div>
+                                        {% endif %}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <div class="job-form-field">
+
+                                        <label for="{{ form.salary_max.id_for_label }}">
+                                            Maximum Salary
+                                        </label>
+
+                                        <div class="salary-input">
+
+                                            <span>₹</span>
+
+                                            {{ form.salary_max }}
+
+                                        </div>
+
+                                        {% if form.salary_max.errors %}
+                                        <div class="job-form-error">
+                                            {{ form.salary_max.errors|striptags }}
+                                        </div>
+                                        {% endif %}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= SKILLS ================= -->
+
+                        <div class="job-form-section">
+
+                            <div class="job-form-section-title">
+
+                                <div class="job-form-section-icon">
+                                    <i class="bi bi-stars"></i>
+                                </div>
+
+                                <div>
+                                    <h2>Skills & Requirements</h2>
+                                    <p>
+                                        Add the skills candidates should
+                                        have for this role.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="job-form-field">
+
+                                <label for="{{ form.skills.id_for_label }}">
+                                    Required Skills
+                                    <span>*</span>
+                                </label>
+
+                                {{ form.skills }}
+
+                                <small class="job-form-help">
+                                    Example: Python Django SQL REST API
+                                </small>
+
+                                {% if form.skills.errors %}
+                                <div class="job-form-error">
+                                    {{ form.skills.errors|striptags }}
+                                </div>
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= DEADLINE ================= -->
+
+                        <div class="job-form-section">
+
+                            <div class="job-form-section-title">
+
+                                <div class="job-form-section-icon">
+                                    <i class="bi bi-calendar-event"></i>
+                                </div>
+
+                                <div>
+                                    <h2>Application Deadline</h2>
+                                    <p>
+                                        Choose the last date candidates
+                                        can apply.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="job-form-field">
+
+                                <label for="{{ form.deadline.id_for_label }}">
+                                    Deadline
+                                    <span>*</span>
+                                </label>
+
+                                {{ form.deadline }}
+
+                                {% if form.deadline.errors %}
+                                <div class="job-form-error">
+                                    {{ form.deadline.errors|striptags }}
+                                </div>
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= STATUS ================= -->
+
+                        <div class="job-form-section">
+
+                            <div class="job-form-section-title">
+
+                                <div class="job-form-section-icon">
+                                    <i class="bi bi-toggle-on"></i>
+                                </div>
+
+                                <div>
+                                    <h2>Publishing</h2>
+                                    <p>
+                                        Control whether this job is
+                                        currently visible to candidates.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="job-active-field">
+
+                                {{ form.is_active }}
+
+                                <div>
+
+                                    <strong>
+                                        Publish this job
+                                    </strong>
+
+                                    <span>
+                                        Candidates can discover and
+                                        apply when this is enabled.
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= ACTIONS ================= -->
+
+                        <div class="job-form-actions">
+
+                            <a href="{% url 'job_list' %}" class="job-cancel-btn">
+                                Cancel
+                            </a>
+
+                            <button type="submit" class="job-submit-btn">
+                                Publish Job
+                                <i class="bi bi-arrow-right"></i>
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= SIDEBAR ================= -->
+
+            <div class="col-lg-4">
+
+                <aside class="job-form-sidebar">
+
+                    <div class="job-posting-tips">
+
+                        <div class="posting-tips-icon">
+                            <i class="bi bi-lightbulb"></i>
+                        </div>
+
+                        <span>
+                            RECRUITER TIPS
+                        </span>
+
+                        <h3>
+                            Create a job candidates
+                            want to apply for.
+                        </h3>
+
+                        <ul>
+
+                            <li>
+                                Use a clear and specific job title.
+                            </li>
+
+                            <li>
+                                Describe responsibilities clearly.
+                            </li>
+
+                            <li>
+                                Mention the most important skills.
+                            </li>
+
+                            <li>
+                                Provide a realistic salary range.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <div class="job-posting-flow">
+
+                        <span>
+                            HIREHUB
+                        </span>
+
+                        <h3>
+                            Your next great hire
+                            could be one post away.
+                        </h3>
+
+                        <div class="posting-flow-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

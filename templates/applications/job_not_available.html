@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Job Not Available | HireHub
+{% endblock %}
+
+{% block content %}
+
+<section class="my-applications-page">
+
+    <div class="container">
+
+        <div class="my-applications-empty">
+
+            <div class="my-applications-empty-icon">
+
+                {% if reason == 'expired' %}
+
+                    <i class="bi bi-calendar-x"></i>
+
+                {% else %}
+
+                    <i class="bi bi-lock"></i>
+
+                {% endif %}
+
+            </div>
+
+
+            {% if reason == 'expired' %}
+
+                <h2>
+                    Application Deadline Passed
+                </h2>
+
+                <p>
+                    The application deadline for
+                    <strong>{{ job.title }}</strong>
+                    has already passed.
+                </p>
+
+            {% else %}
+
+                <h2>
+                    Job No Longer Available
+                </h2>
+
+                <p>
+                    This job is currently inactive and is
+                    no longer accepting applications.
+                </p>
+
+            {% endif %}
+
+
+            <a
+                href="{% url 'job_detail' job.id %}"
+                class="my-applications-browse-btn"
+            >
+
+                <i class="bi bi-arrow-left"></i>
+
+                Back to Job
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

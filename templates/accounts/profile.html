@@ -1,0 +1,371 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Profile | HireHub{% endblock %}
+
+{% block content %}
+
+<div class="profile-page">
+
+    <!-- Profile Hero -->
+    <section class="profile-hero">
+
+        <div class="profile-hero-content">
+
+            <span class="profile-eyebrow">
+                MY HIREHUB PROFILE
+            </span>
+
+            <h1>
+                Your professional
+                <span>identity.</span>
+            </h1>
+
+            <p>
+                Keep your profile updated so recruiters can understand
+                your experience, skills and career background.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Main Profile -->
+    <section class="profile-container">
+
+        <div class="profile-layout">
+
+
+            <!-- Left Profile Card -->
+            <aside class="profile-sidebar">
+
+                <div class="profile-card">
+
+                    <!-- Profile Picture -->
+                    <div class="profile-avatar">
+
+                        {% if profile.profile_picture %}
+                        <img src="{{ profile.profile_picture.url }}" alt="{{ profile.user.username }}">
+                        {% else %}
+                        <span>
+                            {{ profile.user.username|first|upper }}
+                        </span>
+                        {% endif %}
+
+                    </div>
+
+
+                    <h2>
+                        {{ profile.user.get_full_name|default:profile.user.username }}
+                    </h2>
+
+                    <p class="profile-username">
+                        @{{ profile.user.username }}
+                    </p>
+
+
+                    <!-- User Type -->
+                    <div class="profile-role">
+
+                        {% if profile.user_type == 'job_seeker' %}
+                        <i class="bi bi-person"></i>
+                        Job Seeker
+                        {% else %}
+                        <i class="bi bi-building"></i>
+                        Recruiter
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="profile-divider"></div>
+
+
+                    <!-- Contact -->
+                    <div class="profile-contact">
+
+                        <div class="profile-contact-item">
+                            <i class="bi bi-envelope"></i>
+
+                            <div>
+                                <span>Email</span>
+                                <strong>{{ profile.user.email }}</strong>
+                            </div>
+                        </div>
+
+
+                        {% if profile.phone %}
+
+                        <div class="profile-contact-item">
+                            <i class="bi bi-telephone"></i>
+
+                            <div>
+                                <span>Phone</span>
+                                <strong>{{ profile.phone }}</strong>
+                            </div>
+                        </div>
+
+                        {% endif %}
+
+
+                        {% if profile.location %}
+
+                        <div class="profile-contact-item">
+                            <i class="bi bi-geo-alt"></i>
+
+                            <div>
+                                <span>Location</span>
+                                <strong>{{ profile.location }}</strong>
+                            </div>
+                        </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Edit Button -->
+                    <a href="{% url 'profile_edit' %}" class="profile-edit-btn">
+                        <i class="bi bi-pencil"></i>
+                        Edit Profile
+                    </a>
+
+                </div>
+
+            </aside>
+
+
+            <!-- Right Content -->
+            <main class="profile-main">
+
+
+                <!-- Professional Information -->
+                <section class="profile-section">
+
+                    <div class="profile-section-heading">
+
+                        <div>
+                            <span class="profile-section-label">
+                                PROFESSIONAL INFORMATION
+                            </span>
+
+                            <h2>
+                                About your career
+                            </h2>
+                        </div>
+
+                        <i class="bi bi-briefcase profile-heading-icon"></i>
+
+                    </div>
+
+
+                    <div class="profile-info-grid">
+
+
+                        <!-- Experience -->
+                        <div class="profile-info-card">
+
+                            <div class="profile-info-icon purple">
+                                <i class="bi bi-bar-chart"></i>
+                            </div>
+
+                            <div>
+                                <span>Experience</span>
+
+                                <strong>
+                                    {{ profile.experience }} years
+                                </strong>
+                            </div>
+
+                        </div>
+
+
+                        <!-- Profile Type -->
+                        <div class="profile-info-card">
+
+                            <div class="profile-info-icon blue">
+                                <i class="bi bi-person-badge"></i>
+                            </div>
+
+                            <div>
+                                <span>Profile Type</span>
+
+                                <strong>
+                                    {% if profile.user_type == 'job_seeker' %}
+                                    Job Seeker
+                                    {% else %}
+                                    Recruiter
+                                    {% endif %}
+                                </strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Skills -->
+                <section class="profile-section">
+
+                    <div class="profile-section-heading">
+
+                        <div>
+                            <span class="profile-section-label">
+                                SKILLS
+                            </span>
+
+                            <h2>
+                                What you bring
+                            </h2>
+                        </div>
+
+                        <i class="bi bi-stars profile-heading-icon"></i>
+
+                    </div>
+
+
+                    {% if profile.skills %}
+                    <div class="profile-skills">
+
+                        {% for skill in skills %}
+
+                        <span class="profile-skill">
+                            {{ skill }}
+                        </span>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    {% else %}
+
+                    <div class="profile-empty-small">
+                        <i class="bi bi-stars"></i>
+
+                        <span>
+                            Add your skills from Edit Profile.
+                        </span>
+                    </div>
+
+                    {% endif %}
+
+                </section>
+
+
+                <!-- Resume -->
+                <section class="profile-section">
+
+                    <div class="profile-section-heading">
+
+                        <div>
+                            <span class="profile-section-label">
+                                RESUME
+                            </span>
+
+                            <h2>
+                                Your career document
+                            </h2>
+                        </div>
+
+                        <i class="bi bi-file-earmark-text profile-heading-icon"></i>
+
+                    </div>
+
+
+                    {% if profile.resume %}
+
+                    <div class="resume-card">
+
+                        <div class="resume-icon">
+                            <i class="bi bi-file-earmark-pdf"></i>
+                        </div>
+
+
+                        <div class="resume-details">
+
+                            <strong>
+                                {{ profile.resume.name|cut:"resumes/" }}
+                            </strong>
+
+                            <span>
+                                Uploaded resume
+                            </span>
+
+                        </div>
+
+
+                        <a href="{{ profile.resume.url }}" target="_blank" class="resume-view-btn">
+                            View Resume
+                            <i class="bi bi-arrow-up-right"></i>
+                        </a>
+
+                    </div>
+
+                    {% else %}
+
+                    <div class="profile-empty">
+
+                        <div class="profile-empty-icon">
+                            <i class="bi bi-file-earmark-arrow-up"></i>
+                        </div>
+
+                        <div>
+                            <h3>No resume uploaded</h3>
+
+                            <p>
+                                Add your resume so recruiters can
+                                learn more about your experience.
+                            </p>
+                        </div>
+
+                        <a href="{% url 'profile_edit' %}" class="resume-upload-btn">
+                            Upload Resume
+                        </a>
+
+                    </div>
+
+                    {% endif %}
+
+                </section>
+
+
+                <!-- Profile Completion CTA -->
+                <section class="profile-bottom-card">
+
+                    <div class="profile-bottom-icon">
+                        <i class="bi bi-rocket-takeoff"></i>
+                    </div>
+
+                    <div>
+
+                        <span>
+                            KEEP YOUR PROFILE FRESH
+                        </span>
+
+                        <h3>
+                            Make your next opportunity easier to find.
+                        </h3>
+
+                    </div>
+
+                    <a href="{% url 'profile_edit' %}" class="profile-bottom-btn">
+                        Update Profile
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                </section>
+
+
+            </main>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}

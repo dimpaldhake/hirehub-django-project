@@ -1,0 +1,498 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Apply for {{ job.title }} | HireHub
+{% endblock %}
+
+{% block content %}
+
+<section class="apply-page">
+
+    <div class="container">
+
+        <!-- =====================================================
+             BACK TO JOB
+        ====================================================== -->
+
+        <div class="apply-back">
+
+            <a href="{% url 'job_detail' job.id %}">
+
+                <i class="bi bi-arrow-left"></i>
+
+                Back to Job
+
+            </a>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <!-- =================================================
+                 APPLICATION FORM
+            ================================================== -->
+
+            <div class="col-lg-8">
+
+                <div class="application-card">
+
+
+                    <!-- HEADING -->
+
+                    <div class="application-heading">
+
+                        <span class="section-label">
+                            JOB APPLICATION
+                        </span>
+
+                        <h1>
+
+                            Apply for this
+
+                            <span class="gradient-text">
+                                opportunity.
+                            </span>
+
+                        </h1>
+
+                        <p>
+                            Complete your application and take
+                            the next step in your career.
+                        </p>
+
+                    </div>
+
+
+                    <!-- GENERAL FORM ERRORS -->
+
+                    {% if form.non_field_errors %}
+
+                        <div class="login-error">
+
+                            <i class="bi bi-exclamation-circle"></i>
+
+                            <div>
+
+                                {% for error in form.non_field_errors %}
+
+                                    <span>
+                                        {{ error }}
+                                    </span>
+
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- APPLICATION FORM -->
+
+                    <form
+                        method="POST"
+                        enctype="multipart/form-data"
+                        class="application-form"
+                    >
+
+                        {% csrf_token %}
+
+
+                        <!-- =================================================
+                             RESUME
+                        ================================================== -->
+
+                        <div class="application-field">
+
+                            <label for="{{ form.resume.id_for_label }}">
+
+                                Resume
+
+                                <span>*</span>
+
+                            </label>
+
+
+                            <div class="resume-upload">
+
+                                <div class="resume-upload-icon">
+
+                                    <i class="bi bi-file-earmark-arrow-up"></i>
+
+                                </div>
+
+
+                                <div class="resume-upload-content">
+
+                                    <strong>
+                                        Upload your resume
+                                    </strong>
+
+                                    <span>
+                                        PDF, DOC or DOCX · Recommended
+                                    </span>
+
+                                    {{ form.resume }}
+
+                                </div>
+
+                            </div>
+
+
+                            {% if form.resume.errors %}
+
+                                <div class="field-error">
+
+                                    <i class="bi bi-exclamation-circle"></i>
+
+                                    {{ form.resume.errors|striptags }}
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- =================================================
+                             COVER LETTER
+                        ================================================== -->
+
+                        <div class="application-field">
+
+                            <label
+                                for="{{ form.cover_letter.id_for_label }}"
+                            >
+
+                                Cover Letter
+
+                                <span class="optional">
+                                    Optional
+                                </span>
+
+                            </label>
+
+
+                            <textarea
+                                name="{{ form.cover_letter.html_name }}"
+                                id="{{ form.cover_letter.id_for_label }}"
+                                rows="8"
+                                placeholder="Tell the recruiter why you're a good fit for this role..."
+                            >{{ form.cover_letter.value|default:'' }}</textarea>
+
+
+                            {% if form.cover_letter.errors %}
+
+                                <div class="field-error">
+
+                                    <i class="bi bi-exclamation-circle"></i>
+
+                                    {{ form.cover_letter.errors|striptags }}
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- =================================================
+                             APPLICATION INFORMATION
+                        ================================================== -->
+
+                        <div class="application-submit">
+
+                            <div class="application-submit-info">
+
+                                <i class="bi bi-info-circle"></i>
+
+                                <span>
+                                    Your application will be submitted
+                                    with the status <strong>Applied</strong>.
+                                </span>
+
+                            </div>
+
+
+                            <!-- SUBMIT -->
+
+                            <button
+                                type="submit"
+                                class="submit-application-btn"
+                            >
+
+                                Submit Application
+
+                                <i class="bi bi-arrow-right"></i>
+
+                            </button>
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 JOB SUMMARY
+            ================================================== -->
+
+            <div class="col-lg-4">
+
+                <aside class="application-sidebar">
+
+
+                    <!-- =================================================
+                         JOB CARD
+                    ================================================== -->
+
+                    <div class="application-job-card">
+
+                        <span class="sidebar-label">
+                            APPLYING FOR
+                        </span>
+
+
+                        <!-- COMPANY -->
+
+                        <div class="application-company">
+
+                            <div class="application-company-logo">
+
+                                {% if job.company.logo %}
+
+                                    <img
+                                        src="{{ job.company.logo.url }}"
+                                        alt="{{ job.company.company_name }}"
+                                    >
+
+                                {% else %}
+
+                                    {{ job.company.company_name|first|upper }}
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <div>
+
+                                <h3>
+                                    {{ job.title }}
+                                </h3>
+
+                                <span>
+                                    {{ job.company.company_name }}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- JOB DETAILS -->
+
+                        <div class="application-job-details">
+
+
+                            <!-- LOCATION -->
+
+                            <div>
+
+                                <i class="bi bi-geo-alt"></i>
+
+                                <span>
+                                    {{ job.location }}
+                                </span>
+
+                            </div>
+
+
+                            <!-- JOB TYPE -->
+
+                            <div>
+
+                                <i class="bi bi-briefcase"></i>
+
+                                <span>
+                                    {{ job.get_job_type_display }}
+                                </span>
+
+                            </div>
+
+
+                            <!-- EXPERIENCE -->
+
+                            <div>
+
+                                <i class="bi bi-stars"></i>
+
+                                <span>
+
+                                    {% if job.experience == 0 %}
+
+                                        Fresher
+
+                                    {% elif job.experience == 1 %}
+
+                                        1+ Year
+
+                                    {% else %}
+
+                                        {{ job.experience }}+ Years
+
+                                    {% endif %}
+
+                                </span>
+
+                            </div>
+
+
+                            <!-- SALARY -->
+
+                            <div>
+
+                                <i class="bi bi-cash-stack"></i>
+
+                                <span>
+
+                                    {% if job.salary_min and job.salary_max %}
+
+                                        ₹{{ job.salary_min|floatformat:0 }}
+                                        -
+                                        ₹{{ job.salary_max|floatformat:0 }}
+
+                                    {% elif job.salary_min %}
+
+                                        From ₹{{ job.salary_min|floatformat:0 }}
+
+                                    {% elif job.salary_max %}
+
+                                        Up to ₹{{ job.salary_max|floatformat:0 }}
+
+                                    {% else %}
+
+                                        Salary not disclosed
+
+                                    {% endif %}
+
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         DEADLINE
+                    ================================================== -->
+
+                    <div class="application-deadline-card">
+
+                        <div class="deadline-icon">
+
+                            <i class="bi bi-calendar-check"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Application deadline
+                            </span>
+
+                            <strong>
+                                {{ job.deadline|date:"d M Y" }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         APPLICATION TIPS
+                    ================================================== -->
+
+                    <div class="application-tips-card">
+
+                        <div class="tips-heading">
+
+                            <i class="bi bi-lightbulb"></i>
+
+                            <h3>
+                                Application Tips
+                            </h3>
+
+                        </div>
+
+
+                        <ul>
+
+                            <li>
+                                Keep your resume updated.
+                            </li>
+
+                            <li>
+                                Highlight relevant skills.
+                            </li>
+
+                            <li>
+                                Write a short, professional cover letter.
+                            </li>
+
+                            <li>
+                                Check your information before submitting.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         SECURITY / PRIVACY
+                    ================================================== -->
+
+                    <div class="application-security-card">
+
+                        <i class="bi bi-shield-check"></i>
+
+                        <div>
+
+                            <strong>
+                                Your information is secure
+                            </strong>
+
+                            <span>
+                                Your application details are shared
+                                only with the recruiter for this job.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                </aside>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

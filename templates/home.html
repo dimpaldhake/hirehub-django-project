@@ -1,0 +1,833 @@
+{% extends 'base.html' %}
+
+{% block title %}
+HireHub | Find Your Next Opportunity
+{% endblock %}
+
+
+{% block content %}
+
+<!-- =========================================================
+     HERO SECTION
+========================================================= -->
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <!-- ================= LEFT SIDE ================= -->
+
+            <div class="col-lg-6 hero-content">
+
+                <!-- Badge -->
+
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+
+                    Connecting talent with opportunity
+                </div>
+
+
+                <!-- Heading -->
+
+                <h1 class="hero-title">
+
+                    Your next
+                    <span class="gradient-text">
+                        opportunity
+                    </span>
+                    is already moving.
+
+                </h1>
+
+
+                <!-- Description -->
+
+                <p class="hero-description">
+
+                    Discover jobs that match your skills,
+                    connect with great companies, and take
+                    the next step in your career.
+
+                </p>
+
+
+                <!-- ================= SEARCH ================= -->
+
+                <form
+                    method="GET"
+                    action="{% url 'job_list' %}"
+                    class="hero-search"
+                >
+
+                    <!-- Keyword -->
+
+                    <div class="search-field">
+
+                        <i class="bi bi-search"></i>
+
+                        <input
+                            type="text"
+                            name="q"
+                            placeholder="Job title, skills..."
+                        >
+
+                    </div>
+
+
+                    <!-- Location -->
+
+                    <div class="search-field">
+
+                        <i class="bi bi-geo-alt"></i>
+
+                        <input
+                            type="text"
+                            name="location"
+                            placeholder="Location"
+                        >
+
+                    </div>
+
+
+                    <!-- Search Button -->
+
+                    <button
+                        type="submit"
+                        class="hero-search-btn"
+                    >
+
+                        Search Jobs
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </button>
+
+                </form>
+
+
+                <!-- ================= POPULAR SEARCHES ================= -->
+
+                <div class="popular-searches">
+
+                    <span>
+                        Popular:
+                    </span>
+
+                    <a href="{% url 'job_list' %}?q=Python">
+                        Python
+                    </a>
+
+                    <a href="{% url 'job_list' %}?q=Django">
+                        Django
+                    </a>
+
+                    <a href="{% url 'job_list' %}?q=Java">
+                        Java
+                    </a>
+
+                    <a href="{% url 'job_list' %}?q=React">
+                        React
+                    </a>
+
+                    <a href="{% url 'job_list' %}?q=Data">
+                        Data
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= RIGHT SIDE ================= -->
+
+            <div class="col-lg-6 hero-visual">
+
+                <div class="hero-glow"></div>
+
+
+                <!-- Main Person -->
+
+                <div class="hero-person">
+
+                    <div class="person-head"></div>
+
+                    <div class="person-body"></div>
+
+                    <div class="laptop">
+
+                        <div class="laptop-screen">
+
+                            <div class="screen-header"></div>
+
+                            <div class="screen-content">
+
+                                <div class="screen-line"></div>
+
+                                <div class="screen-line short"></div>
+
+                                <div class="screen-card"></div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="laptop-base"></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Apply Card -->
+
+                <div class="floating-card card-apply">
+
+                    <div class="floating-icon">
+                        <i class="bi bi-send"></i>
+                    </div>
+
+                    <div>
+                        <strong>Apply</strong>
+
+                        <span>
+                            Your Dream Job
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <!-- Grow Card -->
+
+                <div class="floating-card card-grow">
+
+                    <div class="floating-icon">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+
+                    <div>
+                        <strong>Grow</strong>
+
+                        <span>
+                            Your Skills
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <!-- Build Card -->
+
+                <div class="floating-card card-build">
+
+                    <div class="floating-icon">
+                        <i class="bi bi-person-workspace"></i>
+                    </div>
+
+                    <div>
+                        <strong>Build</strong>
+
+                        <span>
+                            Your Future
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <!-- Decorative circles -->
+
+                <div class="hero-circle circle-one"></div>
+
+                <div class="hero-circle circle-two"></div>
+
+                <div class="hero-circle circle-three"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- =========================================================
+     STATS SECTION
+========================================================= -->
+
+<section class="stats-section">
+
+    <div class="container">
+
+        <div class="stats-wrapper">
+
+            <!-- Active Jobs -->
+
+            <div class="stat-item">
+
+                <div class="stat-icon">
+                    <i class="bi bi-briefcase"></i>
+                </div>
+
+                <div class="stat-content">
+
+                    <strong>
+                        {{ active_jobs_count }}
+                    </strong>
+
+                    <span>
+                        Active Jobs
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Registered Users -->
+
+            <div class="stat-item">
+
+                <div class="stat-icon">
+                    <i class="bi bi-people"></i>
+                </div>
+
+                <div class="stat-content">
+
+                    <strong>
+                        {{ users_count }}
+                    </strong>
+
+                    <span>
+                        Registered Users
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Companies -->
+
+            <div class="stat-item">
+
+                <div class="stat-icon">
+                    <i class="bi bi-building"></i>
+                </div>
+
+                <div class="stat-content">
+
+                    <strong>
+                        {{ companies_count }}
+                    </strong>
+
+                    <span>
+                        Companies
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Career Growth -->
+
+            <div class="stat-item">
+
+                <div class="stat-icon">
+                    <i class="bi bi-graph-up-arrow"></i>
+                </div>
+
+                <div class="stat-content">
+
+                    <strong>
+                        24/7
+                    </strong>
+
+                    <span>
+                        Career Opportunities
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     WHY HIREHUB
+========================================================= -->
+
+<section class="features-section">
+
+    <div class="container">
+
+        <!-- Heading -->
+
+        <div class="section-heading centered">
+
+            <span class="section-label">
+                WHY HIREHUB
+            </span>
+
+            <h2>
+
+                Everything you need to
+
+                <span class="gradient-text">
+                    move forward
+                </span>
+
+            </h2>
+
+            <p>
+
+                A smarter way for job seekers and recruiters
+                to connect, grow, and succeed.
+
+            </p>
+
+        </div>
+
+
+        <!-- Features -->
+
+        <div class="row g-4">
+
+            <!-- Feature 1 -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon purple">
+
+                        <i class="bi bi-search"></i>
+
+                    </div>
+
+                    <h3>
+                        Find Better Jobs
+                    </h3>
+
+                    <p>
+
+                        Search thousands of opportunities
+                        using skills, location, category,
+                        salary, and job type.
+
+                    </p>
+
+                    <a href="{% url 'job_list' %}">
+
+                        Explore Jobs
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Feature 2 -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon blue">
+
+                        <i class="bi bi-building"></i>
+
+                    </div>
+
+                    <h3>
+                        Connect With Companies
+                    </h3>
+
+                    <p>
+
+                        Discover companies and connect
+                        with recruiters looking for your
+                        skills and experience.
+
+                    </p>
+
+                    <a href="{% url 'job_list' %}">
+
+                        Discover Opportunities
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Feature 3 -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon pink">
+
+                        <i class="bi bi-rocket-takeoff"></i>
+
+                    </div>
+
+                    <h3>
+                        Grow Your Career
+                    </h3>
+
+                    <p>
+
+                        Build your profile, upload your
+                        resume, apply for jobs, and track
+                        your applications.
+
+                    </p>
+
+                    {% if user.is_authenticated %}
+
+                        <a href="{% url 'profile' %}">
+
+                            Build Your Profile
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    {% else %}
+
+                        <a href="{% url 'register' %}">
+
+                            Create Profile
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     LATEST JOBS
+========================================================= -->
+
+<section class="jobs-section">
+
+    <div class="container">
+
+        <!-- Section Heading -->
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-label">
+                    OPPORTUNITIES
+                </span>
+
+                <h2>
+
+                    Latest
+
+                    <span class="gradient-text">
+                        Jobs
+                    </span>
+
+                </h2>
+
+                <p>
+
+                    Discover fresh opportunities
+                    from growing companies.
+
+                </p>
+
+            </div>
+
+
+            <a
+                href="{% url 'job_list' %}"
+                class="view-all-btn"
+            >
+
+                View all jobs
+
+                <i class="bi bi-arrow-up-right"></i>
+
+            </a>
+
+        </div>
+
+
+        <!-- ================= JOB CARDS ================= -->
+
+        <div class="row g-4">
+
+            {% for job in latest_jobs %}
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="job-card">
+
+                    <!-- Top -->
+
+                    <div class="job-card-top">
+
+                        <div class="company-logo-small">
+
+                            {{ job.company.company_name|first|upper }}
+
+                        </div>
+
+
+                        <span class="job-type">
+
+                            {{ job.get_job_type_display }}
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- Job Title -->
+
+                    <h3 class="job-title">
+
+                        {{ job.title }}
+
+                    </h3>
+
+
+                    <!-- Company -->
+
+                    <p class="job-company">
+
+                        {{ job.company.company_name }}
+
+                    </p>
+
+
+                    <!-- Job Meta -->
+
+                    <div class="job-meta">
+
+                        <span>
+
+                            <i class="bi bi-geo-alt"></i>
+
+                            {{ job.location }}
+
+                        </span>
+
+
+                        <span>
+
+                            <i class="bi bi-briefcase"></i>
+
+                            {{ job.get_job_type_display }}
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- Salary -->
+
+                    {% if job.salary_min and job.salary_max %}
+
+                    <div class="job-salary">
+
+                        ₹{{ job.salary_min }}
+                        -
+                        ₹{{ job.salary_max }}
+
+                    </div>
+
+                    {% else %}
+
+                    <div class="job-salary">
+
+                        Salary not disclosed
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- View Job -->
+
+                    <a
+                        href="{% url 'job_detail' job.pk %}"
+                        class="job-view-btn"
+                    >
+
+                        View Job
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            {% empty %}
+
+            <!-- No Jobs -->
+
+            <div class="col-12">
+
+                <div class="no-jobs">
+
+                    <i class="bi bi-briefcase"></i>
+
+                    <h3>
+                        No jobs available yet
+                    </h3>
+
+                    <p>
+
+                        New opportunities will appear here soon.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FINAL CTA
+========================================================= -->
+
+<section class="cta-section">
+
+    <div class="container">
+
+        <div class="cta-box">
+
+            <div class="cta-content">
+
+                <span class="section-label">
+                    YOUR NEXT MOVE
+                </span>
+
+                <h2>
+
+                    Ready to take the next
+                    <span class="gradient-text">
+                        step?
+                    </span>
+
+                </h2>
+
+                <p>
+
+                    Create your HireHub profile and
+                    discover opportunities designed
+                    for your career.
+
+                </p>
+
+
+                <div class="cta-actions">
+
+                    {% if user.is_authenticated %}
+
+                        <a
+                            href="{% url 'job_list' %}"
+                            class="btn-primary-custom"
+                        >
+
+                            Explore Jobs
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    {% else %}
+
+                        <a
+                            href="{% url 'register' %}"
+                            class="btn-primary-custom"
+                        >
+
+                            Get Started
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+
+                        <a
+                            href="{% url 'login' %}"
+                            class="btn-secondary-custom"
+                        >
+
+                            Login
+
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- CTA Decorative Element -->
+
+            <div class="cta-decoration">
+
+                <div class="cta-circle circle-a"></div>
+
+                <div class="cta-circle circle-b"></div>
+
+                <i class="bi bi-rocket-takeoff"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

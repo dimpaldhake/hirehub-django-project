@@ -1,0 +1,476 @@
+/* =========================================================
+   HIREHUB NAVBAR
+   ========================================================= */
+
+.hirehub-navbar {
+    position: relative;
+    z-index: 1000;
+
+    width: 100%;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    border-bottom: 1px solid #eeeeF4;
+
+    box-shadow:
+        0 4px 20px rgba(35, 42, 70, 0.035);
+
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+
+/* =========================================================
+   NAVBAR CONTAINER
+   ========================================================= */
+
+.navbar-container {
+    width: min(1380px, 92%);
+
+    min-height: 78px;
+
+    display: flex;
+
+    align-items: center;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.navbar-logo {
+    display: flex;
+
+    align-items: center;
+
+    flex-shrink: 0;
+
+    text-decoration: none;
+}
+
+.hirehub-logo {
+    width: 145px;
+
+    height: auto;
+
+    display: block;
+}
+
+
+/* =========================================================
+   DESKTOP NAVIGATION
+   ========================================================= */
+
+.navbar-links {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    margin-left: 55px;
+}
+
+.navbar-link {
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 10px 12px;
+
+    color: #667085;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    border-radius: 9px;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+.navbar-link i {
+    font-size: 13px;
+}
+
+.navbar-link:hover {
+    color: #6958ee;
+
+    background: #f5f3ff;
+}
+
+
+/* POST JOB */
+
+.navbar-post-job {
+    color: #6958ee;
+
+    background: #f3f1ff;
+}
+
+.navbar-post-job:hover {
+    color: #ffffff;
+
+    background: #6958ee;
+}
+
+
+/* =========================================================
+   RIGHT SIDE ACTIONS
+   ========================================================= */
+
+.navbar-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    margin-left: auto;
+}
+
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+.navbar-profile {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 5px 8px 5px 5px;
+
+    border-radius: 12px;
+
+    color: #344054;
+
+    text-decoration: none;
+
+    transition: background 0.2s ease;
+}
+
+.navbar-profile:hover {
+    background: #f7f7fb;
+
+    color: #344054;
+}
+
+.navbar-avatar {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6958ee,
+            #8b5cf6
+        );
+
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    box-shadow:
+        0 5px 12px rgba(105, 88, 238, 0.18);
+}
+
+.navbar-user-name {
+    max-width: 100px;
+
+    overflow: hidden;
+
+    color: #4b5568;
+
+    font-size: 11px;
+    font-weight: 650;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+.navbar-login {
+    padding: 9px 15px;
+
+    border-radius: 9px;
+
+    color: #596275;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 650;
+
+    transition: all 0.2s ease;
+}
+
+.navbar-login:hover {
+    color: #6958ee;
+
+    background: #f5f3ff;
+}
+
+
+/* =========================================================
+   GET STARTED
+   ========================================================= */
+
+.navbar-register {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 10px 17px;
+
+    border-radius: 10px;
+
+    background: #6958ee;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    box-shadow:
+        0 7px 17px rgba(105, 88, 238, 0.18);
+
+    transition: all 0.2s ease;
+}
+
+.navbar-register:hover {
+    color: #ffffff;
+
+    background: #5848dc;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 10px 20px rgba(105, 88, 238, 0.25);
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+.navbar-logout {
+    padding: 9px 15px;
+
+    border: 1px solid #e6e7ed;
+
+    border-radius: 9px;
+
+    color: #687286;
+
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 650;
+
+    transition: all 0.2s ease;
+}
+
+.navbar-logout:hover {
+    border-color: #ffd4d9;
+
+    background: #fff5f6;
+
+    color: #c34c58;
+}
+
+
+/* =========================================================
+   MOBILE BUTTON
+   ========================================================= */
+
+.navbar-mobile-toggle {
+    display: none;
+
+    width: 40px;
+    height: 40px;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-left: auto;
+
+    border: 1px solid #e5e7ef;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #475467;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+.navbar-mobile-toggle:hover {
+    border-color: #cfc9ff;
+
+    background: #f7f5ff;
+
+    color: #6958ee;
+}
+
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+.navbar-mobile-menu {
+    display: none;
+
+    width: 92%;
+
+    margin: 0 auto 15px;
+
+    padding: 10px;
+
+    border: 1px solid #eeeeF4;
+
+    border-radius: 16px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 12px 30px rgba(35, 42, 70, 0.08);
+}
+
+.navbar-mobile-menu.active {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.navbar-mobile-menu a {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 13px;
+
+    border-radius: 10px;
+
+    color: #596275;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+}
+
+.navbar-mobile-menu a i {
+    width: 18px;
+
+    color: #6958ee;
+
+    font-size: 15px;
+
+    text-align: center;
+}
+
+.navbar-mobile-menu a:hover {
+    background: #f5f3ff;
+
+    color: #6958ee;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1150px) {
+
+    .navbar-links {
+        margin-left: 25px;
+    }
+
+    .navbar-link {
+        padding: 9px 8px;
+
+        font-size: 11px;
+    }
+
+    .navbar-user-name {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 950px) {
+
+    .navbar-container {
+        min-height: 70px;
+    }
+
+    .navbar-links,
+    .navbar-actions {
+        display: none;
+    }
+
+    .navbar-mobile-toggle {
+        display: flex;
+    }
+
+    .hirehub-logo {
+        width: 135px;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .navbar-container {
+        width: 90%;
+    }
+
+    .hirehub-logo {
+        width: 125px;
+    }
+
+    .navbar-mobile-menu {
+        width: 90%;
+    }
+
+}

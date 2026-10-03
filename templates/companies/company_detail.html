@@ -1,0 +1,367 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ company.company_name }} | HireHub
+{% endblock %}
+
+{% block content %}
+
+<section class="company-detail-page">
+
+    <div class="company-detail-container">
+
+        <!-- Back -->
+
+        <a href="{% url 'dashboard' %}" class="company-back-link">
+            <i class="bi bi-arrow-left"></i>
+            Back to Dashboard
+        </a>
+
+
+        <!-- Company Hero -->
+
+        <div class="company-detail-hero">
+
+            <div class="company-hero-main">
+
+                <div class="company-detail-logo">
+
+                    {% if company.logo %}
+
+                        <img
+                            src="{{ company.logo.url }}"
+                            alt="{{ company.company_name }} Logo"
+                        >
+
+                    {% else %}
+
+                        <span>
+                            {{ company.company_name|first|upper }}
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="company-hero-content">
+
+                    <span class="company-eyebrow">
+                        <i class="bi bi-building"></i>
+                        COMPANY PROFILE
+                    </span>
+
+                    <h1>
+                        {{ company.company_name }}
+                    </h1>
+
+                    <p class="company-location">
+
+                        <i class="bi bi-geo-alt"></i>
+
+                        {{ company.location }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <a
+                href="{% url 'company_edit' %}"
+                class="company-edit-btn"
+            >
+                <i class="bi bi-pencil-square"></i>
+                Edit Company
+            </a>
+
+        </div>
+
+
+        <!-- Main Content -->
+
+        <div class="company-detail-grid">
+
+
+            <!-- Left -->
+
+            <main class="company-detail-main">
+
+
+                <!-- About Company -->
+
+                <div class="company-detail-card">
+
+                    <div class="company-card-heading">
+
+                        <div class="company-card-icon">
+                            <i class="bi bi-buildings"></i>
+                        </div>
+
+                        <div>
+
+                            <span>ABOUT THE COMPANY</span>
+
+                            <h2>
+                                Company Overview
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="company-description">
+
+                        {% if company.description %}
+
+                            {{ company.description|linebreaks }}
+
+                        {% else %}
+
+                            <p class="company-empty-text">
+                                No company description has been added yet.
+                            </p>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <!-- Company Information -->
+
+                <div class="company-detail-card">
+
+                    <div class="company-card-heading">
+
+                        <div class="company-card-icon">
+                            <i class="bi bi-info-circle"></i>
+                        </div>
+
+                        <div>
+
+                            <span>COMPANY INFORMATION</span>
+
+                            <h2>
+                                Details
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="company-info-grid">
+
+
+                        <div class="company-info-item">
+
+                            <div class="company-info-icon">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Location
+                                </span>
+
+                                <strong>
+                                    {{ company.location|default:"Not provided" }}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="company-info-item">
+
+                            <div class="company-info-icon">
+                                <i class="bi bi-globe2"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Website
+                                </span>
+
+                                {% if company.website %}
+
+                                    <a
+                                        href="{{ company.website }}"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        Visit Website
+                                        <i class="bi bi-arrow-up-right"></i>
+                                    </a>
+
+                                {% else %}
+
+                                    <strong>
+                                        Not provided
+                                    </strong>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="company-info-item">
+
+                            <div class="company-info-icon">
+                                <i class="bi bi-person"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Recruiter
+                                </span>
+
+                                <strong>
+                                    {{ company.recruiter.username }}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="company-info-item">
+
+                            <div class="company-info-icon">
+                                <i class="bi bi-calendar3"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Profile Created
+                                </span>
+
+                                <strong>
+                                    {{ company.created_at|date:"d M Y" }}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </main>
+
+
+            <!-- Right Sidebar -->
+
+            <aside class="company-detail-sidebar">
+
+
+                <!-- Company Snapshot -->
+
+                <div class="company-sidebar-card">
+
+                    <span class="sidebar-card-label">
+                        COMPANY SNAPSHOT
+                    </span>
+
+
+                    <div class="company-sidebar-logo">
+
+                        {% if company.logo %}
+
+                            <img
+                                src="{{ company.logo.url }}"
+                                alt="{{ company.company_name }}"
+                            >
+
+                        {% else %}
+
+                            {{ company.company_name|first|upper }}
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <h3>
+                        {{ company.company_name }}
+                    </h3>
+
+
+                    <p>
+                        <i class="bi bi-geo-alt"></i>
+
+                        {{ company.location|default:"Location not provided" }}
+                    </p>
+
+
+                    {% if company.website %}
+
+                        <a
+                            href="{{ company.website }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="company-website-btn"
+                        >
+                            Visit Company Website
+                            <i class="bi bi-arrow-up-right"></i>
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Manage -->
+
+                <div class="company-manage-card">
+
+                    <div class="company-manage-icon">
+                        <i class="bi bi-sliders"></i>
+                    </div>
+
+                    <span>
+                        RECRUITER WORKSPACE
+                    </span>
+
+                    <h3>
+                        Manage your company
+                    </h3>
+
+                    <p>
+                        Keep your company information updated so candidates
+                        can learn more about your organization.
+                    </p>
+
+
+                    <a
+                        href="{% url 'company_edit' %}"
+                        class="company-manage-btn"
+                    >
+                        <i class="bi bi-pencil-square"></i>
+                        Edit Company Profile
+                    </a>
+
+                </div>
+
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

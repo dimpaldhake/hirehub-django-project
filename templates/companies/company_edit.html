@@ -1,0 +1,302 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Edit Company | HireHub
+{% endblock %}
+
+{% block content %}
+
+<section class="company-edit-page">
+
+    <div class="company-edit-container">
+
+        <!-- Back -->
+
+        <a
+            href="{% url 'company' %}"
+            class="company-edit-back"
+        >
+            <i class="bi bi-arrow-left"></i>
+            Back to Company
+        </a>
+
+
+        <!-- Header -->
+
+        <div class="company-edit-header">
+
+            <span class="company-edit-eyebrow">
+                <i class="bi bi-building"></i>
+                COMPANY SETTINGS
+            </span>
+
+            <h1>
+                Shape your company's
+                <span>presence.</span>
+            </h1>
+
+            <p>
+                Keep your company information accurate so candidates
+                can understand who you are and what your organization does.
+            </p>
+
+        </div>
+
+
+        <!-- Form -->
+
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+            class="company-edit-form"
+        >
+
+            {% csrf_token %}
+
+
+            {% if form.non_field_errors %}
+
+                <div class="company-form-errors">
+
+                    {% for error in form.non_field_errors %}
+
+                        <div>
+                            <i class="bi bi-exclamation-circle"></i>
+                            {{ error }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- COMPANY IDENTITY -->
+
+            <div class="company-edit-card">
+
+                <div class="company-edit-card-heading">
+
+                    <div class="company-edit-icon">
+                        <i class="bi bi-buildings"></i>
+                    </div>
+
+                    <div>
+                        <span>01</span>
+                        <h2>Company Identity</h2>
+                        <p>
+                            Basic information candidates will see.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="company-edit-grid">
+
+
+                    <!-- Company Name -->
+
+                    <div class="company-edit-field company-edit-field-full">
+
+                        <label for="{{ form.company_name.id_for_label }}">
+                            Company Name
+                            <span>*</span>
+                        </label>
+
+                        {{ form.company_name }}
+
+                        {% if form.company_name.errors %}
+
+                            <div class="company-field-error">
+                                {{ form.company_name.errors.0 }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Location -->
+
+                    <div class="company-edit-field">
+
+                        <label for="{{ form.location.id_for_label }}">
+                            Location
+                            <span>*</span>
+                        </label>
+
+                        {{ form.location }}
+
+                        {% if form.location.errors %}
+
+                            <div class="company-field-error">
+                                {{ form.location.errors.0 }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Website -->
+
+                    <div class="company-edit-field">
+
+                        <label for="{{ form.website.id_for_label }}">
+                            Website
+                        </label>
+
+                        {{ form.website }}
+
+                        <small>
+                            Example: https://yourcompany.com
+                        </small>
+
+                        {% if form.website.errors %}
+
+                            <div class="company-field-error">
+                                {{ form.website.errors.0 }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Description -->
+
+                    <div class="company-edit-field company-edit-field-full">
+
+                        <label for="{{ form.description.id_for_label }}">
+                            Company Description
+                            <span>*</span>
+                        </label>
+
+                        {{ form.description }}
+
+                        <small>
+                            Tell candidates about your organization,
+                            culture and work environment.
+                        </small>
+
+                        {% if form.description.errors %}
+
+                            <div class="company-field-error">
+                                {{ form.description.errors.0 }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- COMPANY BRANDING -->
+
+            <div class="company-edit-card">
+
+                <div class="company-edit-card-heading">
+
+                    <div class="company-edit-icon">
+                        <i class="bi bi-image"></i>
+                    </div>
+
+                    <div>
+                        <span>02</span>
+                        <h2>Company Branding</h2>
+                        <p>
+                            Add a recognizable logo for your company.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="company-logo-upload">
+
+
+                    <!-- Current Logo -->
+
+                    <div class="company-current-logo">
+
+                        {% if company.logo %}
+
+                            <img
+                                src="{{ company.logo.url }}"
+                                alt="{{ company.company_name }} Logo"
+                            >
+
+                        {% else %}
+
+                            <span>
+                                {{ company.company_name|first|upper }}
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="company-upload-content">
+
+                        <label
+                            for="{{ form.logo.id_for_label }}"
+                            class="company-upload-label"
+                        >
+                            Company Logo
+                        </label>
+
+                        {{ form.logo }}
+
+                        <p>
+                            Upload a clear JPG, JPEG or PNG logo.
+                        </p>
+
+                        {% if form.logo.errors %}
+
+                            <div class="company-field-error">
+                                {{ form.logo.errors.0 }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="company-edit-actions">
+
+                <a
+                    href="{% url 'company' %}"
+                    class="company-cancel-btn"
+                >
+                    Cancel
+                </a>
+
+                <button
+                    type="submit"
+                    class="company-save-btn"
+                >
+                    <i class="bi bi-check2"></i>
+                    Save Company
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

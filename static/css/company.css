@@ -1,0 +1,764 @@
+/* =========================================================
+   HIREHUB — COMPANY DETAIL
+   ========================================================= */
+
+.company-detail-page {
+    min-height: calc(100vh - 80px);
+    background:
+        radial-gradient(
+            circle at 90% 5%,
+            rgba(108, 99, 255, 0.10),
+            transparent 28%
+        ),
+        #f8f9fd;
+    padding: 45px 20px 80px;
+}
+
+.company-detail-container {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   BACK LINK
+   ========================================================= */
+
+.company-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 28px;
+
+    color: #667085;
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.company-back-link:hover {
+    color: #6c63ff;
+    transform: translateX(-3px);
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.company-detail-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+
+    padding: 32px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #f7f5ff 100%
+        );
+
+    border: 1px solid #eceef5;
+    border-radius: 25px;
+
+    box-shadow:
+        0 15px 40px rgba(24, 32, 56, 0.06);
+
+    margin-bottom: 24px;
+}
+
+.company-hero-main {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.company-detail-logo {
+    width: 90px;
+    height: 90px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    background: linear-gradient(
+        135deg,
+        #6c63ff,
+        #8b5cf6
+    );
+
+    color: #ffffff;
+
+    font-size: 34px;
+    font-weight: 800;
+
+    box-shadow:
+        0 12px 28px rgba(108, 99, 255, 0.22);
+}
+
+.company-detail-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.company-hero-content {
+    min-width: 0;
+}
+
+.company-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    margin-bottom: 8px;
+
+    color: #6c63ff;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.company-hero-content h1 {
+    margin: 0;
+
+    color: #172033;
+
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.15;
+    font-weight: 800;
+
+    letter-spacing: -1px;
+
+    word-break: break-word;
+}
+
+.company-location {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    margin: 10px 0 0;
+
+    color: #667085;
+
+    font-size: 14px;
+}
+
+.company-location i {
+    color: #6c63ff;
+}
+
+
+/* =========================================================
+   EDIT BUTTON
+   ========================================================= */
+
+.company-edit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    min-height: 46px;
+    padding: 0 20px;
+
+    flex-shrink: 0;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+    border: 1px solid #dfe3ec;
+
+    color: #4f46a5;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.company-edit-btn:hover {
+    background: #eeecff;
+    border-color: #d9d5ff;
+    color: #5b52e8;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   MAIN GRID
+   ========================================================= */
+
+.company-detail-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 330px;
+    gap: 24px;
+
+    align-items: start;
+}
+
+.company-detail-main {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+
+/* =========================================================
+   MAIN CARDS
+   ========================================================= */
+
+.company-detail-card {
+    background: #ffffff;
+
+    border: 1px solid #eceef5;
+    border-radius: 22px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 10px 30px rgba(24, 32, 56, 0.04);
+}
+
+.company-card-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+
+    margin-bottom: 25px;
+}
+
+.company-card-icon {
+    width: 46px;
+    height: 46px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: #eeecff;
+    color: #6c63ff;
+
+    font-size: 19px;
+}
+
+.company-card-heading span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #8b5cf6;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.company-card-heading h2 {
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 21px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.company-description {
+    color: #667085;
+
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.company-description p {
+    margin-bottom: 12px;
+}
+
+.company-description p:last-child {
+    margin-bottom: 0;
+}
+
+.company-empty-text {
+    color: #98a0b1;
+    font-style: italic;
+}
+
+
+/* =========================================================
+   INFORMATION GRID
+   ========================================================= */
+
+.company-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.company-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+
+    padding: 17px;
+
+    border: 1px solid #edf0f5;
+    border-radius: 15px;
+
+    background: #fbfcfe;
+}
+
+.company-info-icon {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: #eeecff;
+    color: #6c63ff;
+
+    font-size: 16px;
+}
+
+.company-info-item > div:last-child {
+    min-width: 0;
+}
+
+.company-info-item span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #98a0b1;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.company-info-item strong {
+    display: block;
+
+    color: #273248;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    overflow-wrap: anywhere;
+}
+
+.company-info-item a {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+
+    color: #6c63ff;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+.company-info-item a:hover {
+    color: #5148dc;
+}
+
+.company-info-item a i {
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.company-detail-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    position: sticky;
+    top: 100px;
+}
+
+
+/* =========================================================
+   SNAPSHOT
+   ========================================================= */
+
+.company-sidebar-card {
+    padding: 27px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px solid #eceef5;
+    border-radius: 22px;
+
+    box-shadow:
+        0 10px 30px rgba(24, 32, 56, 0.05);
+}
+
+.sidebar-card-label {
+    display: block;
+
+    margin-bottom: 20px;
+
+    color: #8b5cf6;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.company-sidebar-logo {
+    width: 74px;
+    height: 74px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    background: linear-gradient(
+        135deg,
+        #6c63ff,
+        #8b5cf6
+    );
+
+    color: #ffffff;
+
+    font-size: 27px;
+    font-weight: 800;
+}
+
+.company-sidebar-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.company-sidebar-card h3 {
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 18px;
+    font-weight: 800;
+
+    overflow-wrap: anywhere;
+}
+
+.company-sidebar-card p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+
+    margin: 8px 0 0;
+
+    color: #8a93a5;
+
+    font-size: 12px;
+}
+
+.company-sidebar-card p i {
+    color: #6c63ff;
+}
+
+
+/* =========================================================
+   WEBSITE BUTTON
+   ========================================================= */
+
+.company-website-btn {
+    width: 100%;
+
+    margin-top: 20px;
+
+    min-height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    border-radius: 12px;
+
+    background: #eeecff;
+    color: #5b52e8;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.company-website-btn:hover {
+    background: #e2dfff;
+    color: #4f46d8;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   MANAGE CARD
+   ========================================================= */
+
+.company-manage-card {
+    position: relative;
+    overflow: hidden;
+
+    padding: 27px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #665df5,
+            #8b5cf6
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 15px 35px rgba(108, 99, 255, 0.22);
+}
+
+.company-manage-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    right: -65px;
+    top: -65px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.09);
+}
+
+.company-manage-icon {
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 17px;
+
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    font-size: 18px;
+}
+
+.company-manage-card > span {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.company-manage-card h3 {
+    margin: 0;
+
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.company-manage-card p {
+    margin: 10px 0 20px;
+
+    color: rgba(255, 255, 255, 0.78);
+
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+.company-manage-btn {
+    position: relative;
+    z-index: 2;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    width: 100%;
+    min-height: 44px;
+
+    border-radius: 11px;
+
+    background: #ffffff;
+    color: #5b52e8;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    transition: 0.2s ease;
+}
+
+.company-manage-btn:hover {
+    color: #4f46d8;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .company-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .company-detail-sidebar {
+        position: static;
+
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .company-detail-page {
+        padding: 32px 15px 60px;
+    }
+
+    .company-detail-hero {
+        align-items: flex-start;
+        flex-direction: column;
+
+        padding: 25px;
+    }
+
+    .company-edit-btn {
+        width: 100%;
+    }
+
+    .company-detail-card {
+        padding: 24px 20px;
+    }
+
+    .company-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .company-detail-sidebar {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .company-detail-page {
+        padding: 25px 12px 50px;
+    }
+
+    .company-detail-hero {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .company-hero-main {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .company-detail-logo {
+        width: 68px;
+        height: 68px;
+
+        border-radius: 17px;
+
+        font-size: 26px;
+    }
+
+    .company-hero-content h1 {
+        font-size: 25px;
+    }
+
+    .company-location {
+        font-size: 12px;
+    }
+
+    .company-detail-card,
+    .company-sidebar-card,
+    .company-manage-card {
+        border-radius: 18px;
+    }
+
+    .company-detail-card {
+        padding: 20px 16px;
+    }
+
+    .company-card-heading {
+        margin-bottom: 20px;
+    }
+
+    .company-card-heading h2 {
+        font-size: 18px;
+    }
+
+    .company-info-item {
+        padding: 14px;
+    }
+}

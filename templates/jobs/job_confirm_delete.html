@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Job | HireHub{% endblock %}
+
+{% block content %}
+
+<section class="delete-job-page">
+
+    <div class="delete-job-card">
+
+        <div class="delete-icon">
+            <i class="bi bi-trash3"></i>
+        </div>
+
+        <span class="delete-label">DELETE JOB</span>
+
+        <h1>Delete this job posting?</h1>
+
+        <p class="delete-description">
+            You are about to permanently delete:
+        </p>
+
+        <div class="job-preview">
+            <h3>{{ job.title }}</h3>
+
+            <p>
+                <i class="bi bi-geo-alt"></i>
+                {{ job.location }}
+            </p>
+
+            <p>
+                <i class="bi bi-building"></i>
+                {{ job.company.company_name }}
+            </p>
+        </div>
+
+        <div class="warning-box">
+            <i class="bi bi-exclamation-triangle"></i>
+
+            <span>
+                This action cannot be undone. The job posting and
+                its related applications may be affected.
+            </span>
+        </div>
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            <div class="delete-actions">
+
+                <a href="{% url 'my_jobs' %}" class="btn-cancel">
+                    <i class="bi bi-arrow-left"></i>
+                    Cancel
+                </a>
+
+                <button type="submit" class="btn-delete">
+                    <i class="bi bi-trash3"></i>
+                    Yes, Delete Job
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

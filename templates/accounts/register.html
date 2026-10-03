@@ -1,0 +1,302 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Create Account | HireHub{% endblock %}
+
+{% block content %}
+
+<div class="register-page">
+
+    <!-- Left Branding Panel -->
+    <section class="register-brand-panel">
+
+        <div class="register-brand-content">
+
+            <a href="{% url 'home' %}" class="register-logo">
+                <span class="register-logo-mark">H</span>
+
+                <span>
+                    Hire<span>Hub</span>
+                </span>
+            </a>
+
+            <div class="register-brand-message">
+
+                <span class="register-eyebrow">
+                    JOIN HIREHUB
+                </span>
+
+                <h1>
+                    Build your
+                    <span>next chapter.</span>
+                </h1>
+
+                <p>
+                    Create your HireHub account and take the next
+                    step toward meaningful career opportunities.
+                </p>
+
+            </div>
+
+            <div class="register-benefits">
+
+                <div class="register-benefit">
+                    <i class="bi bi-briefcase"></i>
+
+                    <div>
+                        <strong>Find relevant jobs</strong>
+                        <span>Explore opportunities based on your skills.</span>
+                    </div>
+                </div>
+
+                <div class="register-benefit">
+                    <i class="bi bi-person-check"></i>
+
+                    <div>
+                        <strong>Create your profile</strong>
+                        <span>Showcase your experience and professional skills.</span>
+                    </div>
+                </div>
+
+                <div class="register-benefit">
+                    <i class="bi bi-rocket-takeoff"></i>
+
+                    <div>
+                        <strong>Move forward</strong>
+                        <span>Track applications and grow your career.</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Registration Form -->
+    <section class="register-form-panel">
+
+        <div class="register-form-container">
+
+            <!-- Mobile Logo -->
+            <div class="register-mobile-logo">
+
+                <a href="{% url 'home' %}" class="register-logo">
+                    <span class="register-logo-mark">H</span>
+
+                    <span>
+                        Hire<span>Hub</span>
+                    </span>
+                </a>
+
+            </div>
+
+
+            <!-- Heading -->
+            <div class="register-heading">
+
+                <span class="register-form-eyebrow">
+                    CREATE ACCOUNT
+                </span>
+
+                <h2>
+                    Join HireHub
+                </h2>
+
+                <p>
+                    Create your account and start your journey.
+                </p>
+
+            </div>
+
+
+            <!-- Form Errors -->
+            {% if form.non_field_errors %}
+
+                <div class="register-error">
+
+                    <i class="bi bi-exclamation-circle"></i>
+
+                    <div>
+                        {% for error in form.non_field_errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+
+            <form method="POST" class="register-form">
+
+                {% csrf_token %}
+
+
+                <!-- Username -->
+                <div class="register-field">
+
+                    <label for="{{ form.username.id_for_label }}">
+                        Username
+                    </label>
+
+                    <div class="register-input-wrapper">
+
+                        <i class="bi bi-person"></i>
+
+                        {{ form.username }}
+
+                    </div>
+
+                    {% if form.username.errors %}
+                        <div class="field-error">
+                            {{ form.username.errors.0 }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Email -->
+                <div class="register-field">
+
+                    <label for="{{ form.email.id_for_label }}">
+                        Email Address
+                    </label>
+
+                    <div class="register-input-wrapper">
+
+                        <i class="bi bi-envelope"></i>
+
+                        {{ form.email }}
+
+                    </div>
+
+                    {% if form.email.errors %}
+                        <div class="field-error">
+                            {{ form.email.errors.0 }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Account Type -->
+                <div class="register-field">
+
+                    <label for="{{ form.user_type.id_for_label }}">
+                        Account Type
+                    </label>
+
+                    <div class="register-input-wrapper">
+
+                        <i class="bi bi-person-badge"></i>
+
+                        {{ form.user_type }}
+
+                    </div>
+
+                    {% if form.user_type.errors %}
+                        <div class="field-error">
+                            {{ form.user_type.errors.0 }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="register-field">
+
+                    <label for="{{ form.password1.id_for_label }}">
+                        Password
+                    </label>
+
+                    <div class="register-input-wrapper">
+
+                        <i class="bi bi-lock"></i>
+
+                        {{ form.password1 }}
+
+                    </div>
+
+                    {% if form.password1.errors %}
+                        <div class="field-error">
+                            {{ form.password1.errors.0 }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Confirm Password -->
+                <div class="register-field">
+
+                    <label for="{{ form.password2.id_for_label }}">
+                        Confirm Password
+                    </label>
+
+                    <div class="register-input-wrapper">
+
+                        <i class="bi bi-shield-lock"></i>
+
+                        {{ form.password2 }}
+
+                    </div>
+
+                    {% if form.password2.errors %}
+                        <div class="field-error">
+                            {{ form.password2.errors.0 }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Submit -->
+                <button
+                    type="submit"
+                    class="register-submit-btn"
+                >
+                    Create Account
+                    <i class="bi bi-arrow-right"></i>
+                </button>
+
+            </form>
+
+
+            <!-- Login Link -->
+            <div class="register-login">
+
+                <p>
+                    Already have an account?
+                </p>
+
+                <a href="{% url 'login' %}">
+                    Sign in to HireHub
+                    <i class="bi bi-arrow-up-right"></i>
+                </a>
+
+            </div>
+
+
+            <!-- Security Note -->
+            <div class="register-footer-note">
+
+                <i class="bi bi-shield-check"></i>
+
+                <span>
+                    Your account information is securely handled by HireHub.
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}

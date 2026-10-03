@@ -1,0 +1,373 @@
+{% extends 'base.html' %}
+
+{% block title %}Candidate Details | HireHub{% endblock %}
+
+{% block content %}
+
+<section class="candidate-detail-page">
+
+    <div class="container">
+
+        <!-- =========================
+             PAGE HEADER
+        ========================== -->
+
+        <div class="candidate-detail-header">
+
+            <div>
+
+                <span class="page-eyebrow">
+                    CANDIDATE PROFILE
+                </span>
+
+                <h1>
+                    {{ application.applicant.get_full_name|default:application.applicant.username }}
+                </h1>
+
+                <p>
+                    Application for
+                    <strong>{{ application.job.title }}</strong>
+                </p>
+
+            </div>
+
+            <a
+                href="{% url 'recruiter_job_applicants' application.job.id %}"
+                class="candidate-back-btn"
+            >
+                <i class="bi bi-arrow-left"></i>
+                Back to Applicants
+            </a>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <!-- =========================
+                 LEFT SIDE
+            ========================== -->
+
+            <div class="col-lg-8">
+
+
+                <!-- CANDIDATE INFORMATION -->
+
+                <div class="candidate-card">
+
+                    <div class="candidate-card-heading">
+
+                        <div class="candidate-avatar">
+                            {{ application.applicant.username|first|upper }}
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                {{ application.applicant.get_full_name|default:application.applicant.username }}
+                            </h3>
+
+                            <p>
+                                {{ application.applicant.email }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="candidate-info-grid">
+
+                        <div>
+
+                            <span>
+                                Username
+                            </span>
+
+                            <strong>
+                                {{ application.applicant.username }}
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Location
+                            </span>
+
+                            <strong>
+                                {{ application.applicant.profile.location|default:"Not provided" }}
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Phone
+                            </span>
+
+                            <strong>
+                                {{ application.applicant.profile.phone|default:"Not provided" }}
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Experience
+                            </span>
+
+                            <strong>
+                                {{ application.applicant.profile.experience }} years
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SKILLS -->
+
+                <div class="candidate-card">
+
+                    <h3>
+                        Skills
+                    </h3>
+
+                    <p class="candidate-skills">
+                        {{ application.applicant.profile.skills|default:"No skills added yet." }}
+                    </p>
+
+                </div>
+
+
+                <!-- COVER LETTER -->
+
+                <div class="candidate-card">
+
+                    <h3>
+                        Cover Letter
+                    </h3>
+
+                    {% if application.cover_letter %}
+
+                        <p class="cover-letter-text">
+                            {{ application.cover_letter|linebreaksbr }}
+                        </p>
+
+                    {% else %}
+
+                        <p class="text-muted">
+                            No cover letter was provided.
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =========================
+                 RIGHT SIDE
+            ========================== -->
+
+            <div class="col-lg-4">
+
+
+                <!-- APPLICATION STATUS -->
+
+                <div class="candidate-card">
+
+                    <span class="card-label">
+                        APPLICATION STATUS
+                    </span>
+
+
+                    <div class="current-status">
+                        {{ application.get_status_display }}
+                    </div>
+
+
+                    <p class="application-date">
+
+                        Applied on
+
+                        {{ application.applied_at|date:"d M Y" }}
+
+                    </p>
+
+
+                    <!-- STATUS UPDATE FORM -->
+
+                    <form
+                        method="post"
+                        action="{% url 'update_application_status' application.id %}"
+                    >
+
+                        {% csrf_token %}
+
+
+                        <label class="status-label">
+                            Update Status
+                        </label>
+
+
+                        <select
+                            name="status"
+                            class="form-select candidate-status-select"
+                        >
+
+                            <!-- APPLIED -->
+
+                            <option
+                                value="applied"
+                                {% if application.status == 'applied' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Applied
+                            </option>
+
+
+                            <!-- SHORTLISTED -->
+
+                            <option
+                                value="shortlisted"
+                                {% if application.status == 'shortlisted' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Shortlisted
+                            </option>
+
+
+                            <!-- REJECTED -->
+
+                            <option
+                                value="rejected"
+                                {% if application.status == 'rejected' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Rejected
+                            </option>
+
+
+                            <!-- SELECTED -->
+
+                            <option
+                                value="selected"
+                                {% if application.status == 'selected' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Selected
+                            </option>
+
+                        </select>
+
+
+                        <button
+                            type="submit"
+                            class="candidate-update-btn"
+                        >
+
+                            Update Status
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- =========================
+                     RESUME
+                ========================== -->
+
+                <div class="candidate-card resume-card">
+
+                    <div class="resume-icon">
+
+                        <i class="bi bi-file-earmark-person"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Candidate Resume
+                    </h3>
+
+
+                    {% if application.resume %}
+
+                        <p>
+                            Resume uploaded by candidate.
+                        </p>
+
+
+                        <a
+                            href="{{ application.resume.url }}"
+                            target="_blank"
+                            class="resume-btn"
+                        >
+
+                            <i class="bi bi-file-earmark-pdf"></i>
+
+                            View Resume
+
+                        </a>
+
+
+                    {% elif application.applicant.profile.resume %}
+
+                        <p>
+                            Using candidate profile resume.
+                        </p>
+
+
+                        <a
+                            href="{{ application.applicant.profile.resume.url }}"
+                            target="_blank"
+                            class="resume-btn"
+                        >
+
+                            <i class="bi bi-file-earmark-person"></i>
+
+                            View Resume
+
+                        </a>
+
+
+                    {% else %}
+
+                        <p class="text-muted">
+                            No resume uploaded.
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

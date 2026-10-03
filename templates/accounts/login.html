@@ -1,0 +1,377 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login | HireHub{% endblock %}
+
+{% block content %}
+
+<div class="login-page">
+
+    <!-- Left Branding Panel -->
+    <section class="login-brand-panel">
+
+        <div class="login-brand-content">
+
+            <a href="{% url 'home' %}" class="login-logo">
+
+                <span class="login-logo-mark">
+                    H
+                </span>
+
+                <span>
+                    Hire<span>Hub</span>
+                </span>
+
+            </a>
+
+
+            <div class="login-brand-message">
+
+                <span class="login-eyebrow">
+                    WELCOME TO HIREHUB
+                </span>
+
+                <h1>
+                    Your next
+                    <span>opportunity</span>
+                    starts here.
+                </h1>
+
+                <p>
+                    Discover meaningful opportunities, connect with
+                    great companies and move your career forward.
+                </p>
+
+            </div>
+
+
+            <div class="login-benefits">
+
+                <div class="login-benefit">
+
+                    <i class="bi bi-search"></i>
+
+                    <div>
+
+                        <strong>
+                            Discover opportunities
+                        </strong>
+
+                        <span>
+                            Find jobs that match your skills.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="login-benefit">
+
+                    <i class="bi bi-people"></i>
+
+                    <div>
+
+                        <strong>
+                            Connect with talent
+                        </strong>
+
+                        <span>
+                            Build meaningful professional connections.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="login-benefit">
+
+                    <i class="bi bi-graph-up-arrow"></i>
+
+                    <div>
+
+                        <strong>
+                            Grow your career
+                        </strong>
+
+                        <span>
+                            Turn your next application into an opportunity.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Login Panel -->
+    <section class="login-form-panel">
+
+        <div class="login-form-container">
+
+
+            <!-- Mobile Logo -->
+
+            <div class="login-mobile-logo">
+
+                <a href="{% url 'home' %}" class="login-logo">
+
+                    <span class="login-logo-mark">
+                        H
+                    </span>
+
+                    <span>
+                        Hire<span>Hub</span>
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <!-- Heading -->
+
+            <div class="login-heading">
+
+                <span class="login-form-eyebrow">
+                    ACCOUNT ACCESS
+                </span>
+
+                <h2>
+                    Welcome back
+                </h2>
+
+                <p>
+                    Sign in to continue your HireHub journey.
+                </p>
+
+            </div>
+
+
+            <!-- Error Message -->
+
+            {% if error %}
+
+                <div class="login-error">
+
+                    <i class="bi bi-exclamation-circle"></i>
+
+                    <span>
+                        {{ error }}
+                    </span>
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- Login Form -->
+
+            <form method="POST" class="login-form">
+
+                {% csrf_token %}
+
+
+                <!-- IMPORTANT:
+                     Preserve the page the user wanted
+                -->
+
+                <input
+                    type="hidden"
+                    name="next"
+                    value="{{ next|default:'' }}"
+                >
+
+
+                <!-- Username -->
+
+                <div class="login-field">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <div class="login-input-wrapper">
+
+                        <i class="bi bi-person"></i>
+
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Enter your username"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Password -->
+
+                <div class="login-field">
+
+                    <div class="login-label-row">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                    </div>
+
+
+                    <div class="login-input-wrapper">
+
+                        <i class="bi bi-lock"></i>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="passwordToggle"
+                            aria-label="Show password"
+                        >
+
+                            <i class="bi bi-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Submit -->
+
+                <button
+                    type="submit"
+                    class="login-submit-btn"
+                >
+
+                    Sign In
+
+                    <i class="bi bi-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+
+            <!-- Divider -->
+
+            <div class="login-divider">
+
+                <span>
+                    OR
+                </span>
+
+            </div>
+
+
+            <!-- Register -->
+
+            <div class="login-register">
+
+                <p>
+                    Don't have an account?
+                </p>
+
+                <a href="{% url 'register' %}">
+
+                    Create your HireHub account
+
+                    <i class="bi bi-arrow-up-right"></i>
+
+                </a>
+
+            </div>
+
+
+            <!-- Security Note -->
+
+            <div class="login-footer-note">
+
+                <i class="bi bi-shield-check"></i>
+
+                <span>
+                    Your account information is securely handled by HireHub.
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- Password Toggle -->
+
+<script>
+
+    const passwordInput =
+        document.getElementById("password");
+
+    const passwordToggle =
+        document.getElementById("passwordToggle");
+
+
+    if (passwordToggle) {
+
+        passwordToggle.addEventListener(
+            "click",
+            function () {
+
+                if (passwordInput.type === "password") {
+
+                    passwordInput.type = "text";
+
+                    this.innerHTML =
+                        '<i class="bi bi-eye-slash"></i>';
+
+                    this.setAttribute(
+                        "aria-label",
+                        "Hide password"
+                    );
+
+                } else {
+
+                    passwordInput.type = "password";
+
+                    this.innerHTML =
+                        '<i class="bi bi-eye"></i>';
+
+                    this.setAttribute(
+                        "aria-label",
+                        "Show password"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+</script>
+
+{% endblock %}

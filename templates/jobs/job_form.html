@@ -1,0 +1,388 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if object %}
+        Edit Job | HireHub
+    {% else %}
+        Post a Job | HireHub
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<section class="job-form-page">
+
+    <div class="job-form-container">
+
+        <!-- HEADER -->
+
+        <div class="job-form-header">
+
+            <a href="{% url 'my_jobs' %}" class="job-form-back">
+                <i class="bi bi-arrow-left"></i>
+                Back to My Jobs
+            </a>
+
+            <span class="job-form-eyebrow">
+                <i class="bi bi-briefcase"></i>
+                RECRUITER WORKSPACE
+            </span>
+
+            <h1>
+                {% if object %}
+                    Update your <span>job posting.</span>
+                {% else %}
+                    Find your next <span>great hire.</span>
+                {% endif %}
+            </h1>
+
+            <p>
+                {% if object %}
+                    Keep your job information accurate and up to date.
+                {% else %}
+                    Create a clear, professional job listing that attracts
+                    the right candidates.
+                {% endif %}
+            </p>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <form method="post" class="job-form">
+
+            {% csrf_token %}
+
+
+            {% if form.non_field_errors %}
+
+                <div class="job-form-errors">
+
+                    {% for error in form.non_field_errors %}
+
+                        <div>
+                            <i class="bi bi-exclamation-circle"></i>
+                            {{ error }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- BASIC INFORMATION -->
+
+            <div class="job-form-card">
+
+                <div class="job-form-card-heading">
+
+                    <div class="job-form-icon">
+                        <i class="bi bi-file-earmark-text"></i>
+                    </div>
+
+                    <div>
+                        <span>01</span>
+                        <h2>Basic Information</h2>
+                        <p>Tell candidates what this opportunity is about.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="job-form-grid">
+
+                    <div class="job-field job-field-full">
+
+                        <label for="{{ form.title.id_for_label }}">
+                            Job Title
+                            <span>*</span>
+                        </label>
+
+                        {{ form.title }}
+
+                        {% if form.title.errors %}
+                            <div class="field-error">
+                                {{ form.title.errors.0 }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="job-field">
+
+                        <label for="{{ form.category.id_for_label }}">
+                            Category
+                        </label>
+
+                        {{ form.category }}
+
+                        {% if form.category.errors %}
+                            <div class="field-error">
+                                {{ form.category.errors.0 }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="job-field">
+
+                        <label for="{{ form.job_type.id_for_label }}">
+                            Job Type
+                            <span>*</span>
+                        </label>
+
+                        {{ form.job_type }}
+
+                        {% if form.job_type.errors %}
+                            <div class="field-error">
+                                {{ form.job_type.errors.0 }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="job-field job-field-full">
+
+                        <label for="{{ form.description.id_for_label }}">
+                            Job Description
+                            <span>*</span>
+                        </label>
+
+                        {{ form.description }}
+
+                        <small>
+                            Explain the role, responsibilities and what the
+                            candidate will work on.
+                        </small>
+
+                        {% if form.description.errors %}
+                            <div class="field-error">
+                                {{ form.description.errors.0 }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- JOB DETAILS -->
+
+            <div class="job-form-card">
+
+                <div class="job-form-card-heading">
+
+                    <div class="job-form-icon">
+                        <i class="bi bi-geo-alt"></i>
+                    </div>
+
+                    <div>
+                        <span>02</span>
+                        <h2>Job Details</h2>
+                        <p>Help candidates understand the opportunity.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="job-form-grid">
+
+                    <div class="job-field">
+
+                        <label for="{{ form.location.id_for_label }}">
+                            Location
+                            <span>*</span>
+                        </label>
+
+                        {{ form.location }}
+
+                        {% if form.location.errors %}
+                            <div class="field-error">
+                                {{ form.location.errors.0 }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="job-field">
+
+                        <label for="{{ form.experience.id_for_label }}">
+                            Experience
+                            <span>*</span>
+                        </label>
+
+                        {{ form.experience }}
+
+                        <small>
+                            Enter required years of experience.
+                        </small>
+
+                        {% if form.experience.errors %}
+                            <div class="field-error">
+                                {{ form.experience.errors.0 }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="job-field">
+
+                        <label for="{{ form.salary_min.id_for_label }}">
+                            Minimum Salary
+                        </label>
+
+                        {{ form.salary_min }}
+
+                        {% if form.salary_min.errors %}
+                            <div class="field-error">
+                                {{ form.salary_min.errors.0 }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="job-field">
+
+                        <label for="{{ form.salary_max.id_for_label }}">
+                            Maximum Salary
+                        </label>
+
+                        {{ form.salary_max }}
+
+                        {% if form.salary_max.errors %}
+                            <div class="field-error">
+                                {{ form.salary_max.errors.0 }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="job-field">
+
+                        <label for="{{ form.deadline.id_for_label }}">
+                            Application Deadline
+                            <span>*</span>
+                        </label>
+
+                        {{ form.deadline }}
+
+                        {% if form.deadline.errors %}
+                            <div class="field-error">
+                                {{ form.deadline.errors.0 }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="job-field">
+
+                        <label for="{{ form.skills.id_for_label }}">
+                            Required Skills
+                            <span>*</span>
+                        </label>
+
+                        {{ form.skills }}
+
+                        <small>
+                            Example: Python, Django, SQL, REST API
+                        </small>
+
+                        {% if form.skills.errors %}
+                            <div class="field-error">
+                                {{ form.skills.errors.0 }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIVE STATUS -->
+
+            {% if object %}
+
+                <div class="job-form-card job-status-card">
+
+                    <div class="job-status-content">
+
+                        <div class="job-form-icon">
+                            <i class="bi bi-toggle-on"></i>
+                        </div>
+
+                        <div>
+                            <h2>Job Visibility</h2>
+                            <p>
+                                Control whether candidates can currently
+                                see and apply to this job.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <label class="job-checkbox">
+
+                        {{ form.is_active }}
+
+                        <span>
+                            Keep this job active
+                        </span>
+
+                    </label>
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- ACTIONS -->
+
+            <div class="job-form-actions">
+
+                <a
+                    href="{% url 'my_jobs' %}"
+                    class="job-cancel-btn"
+                >
+                    Cancel
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="job-submit-btn"
+                >
+
+                    {% if object %}
+                        <i class="bi bi-check2"></i>
+                        Update Job
+                    {% else %}
+                        <i class="bi bi-send"></i>
+                        Publish Job
+                    {% endif %}
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

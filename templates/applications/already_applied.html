@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Already Applied | HireHub
+{% endblock %}
+
+{% block content %}
+
+<section class="already-applied-page">
+
+    <div class="container">
+
+        <div class="already-applied-card">
+
+            <!-- ICON -->
+
+            <div class="already-applied-icon">
+                <i class="bi bi-check2-circle"></i>
+            </div>
+
+
+            <!-- CONTENT -->
+
+            <span class="section-label">
+                APPLICATION STATUS
+            </span>
+
+            <h1>
+                You've already
+                <span class="gradient-text">applied.</span>
+            </h1>
+
+            <p>
+                You have already submitted an application
+                for this position. You cannot apply for the
+                same job more than once.
+            </p>
+
+
+            <!-- JOB INFO -->
+
+            <div class="already-applied-job">
+
+                <div class="already-applied-company-logo">
+
+                    {% if job.company.logo %}
+
+                        <img
+                            src="{{ job.company.logo.url }}"
+                            alt="{{ job.company.company_name }}"
+                        >
+
+                    {% else %}
+
+                        {{ job.company.company_name|first|upper }}
+
+                    {% endif %}
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        {{ job.title }}
+                    </h3>
+
+                    <span>
+                        {{ job.company.company_name }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="already-applied-actions">
+
+                <a
+                    href="{% url 'my_applications' %}"
+                    class="btn-primary-custom"
+                >
+                    View My Applications
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+
+
+                <a
+                    href="{% url 'job_list' %}"
+                    class="btn-secondary-custom"
+                >
+                    Browse More Jobs
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,420 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Applicants | HireHub
+{% endblock %}
+
+{% block content %}
+
+<section class="recruiter-applicants-page">
+
+    <div class="container">
+
+        <!-- PAGE HEADER -->
+
+        <div class="recruiter-applicants-header">
+
+            <div>
+
+                <span class="section-label">
+                    TALENT MANAGEMENT
+                </span>
+
+                <h1>
+                    Manage
+                    <span class="gradient-text">Applicants.</span>
+                </h1>
+
+                <p>
+                    Review candidates who have applied
+                    to your job opportunities.
+                </p>
+
+            </div>
+
+            <a
+                href="{% url 'job_list' %}"
+                class="applicants-header-btn"
+            >
+                <i class="bi bi-briefcase"></i>
+                View Jobs
+            </a>
+
+        </div>
+
+
+        {% if applications %}
+
+        <!-- APPLICATION COUNT -->
+
+        <div class="recruiter-applicants-summary">
+
+            <div class="recruiter-summary-icon">
+                <i class="bi bi-people"></i>
+            </div>
+
+            <div>
+
+                <strong>
+                    {{ applications|length }}
+                </strong>
+
+                <span>
+                    Candidate{{ applications|length|pluralize }}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- APPLICANTS -->
+
+        <div class="recruiter-applicants-list">
+
+            {% for application in applications %}
+
+            <article class="recruiter-applicant-card">
+
+
+                <!-- APPLICANT AVATAR -->
+
+                <div class="applicant-avatar">
+                    {{ application.applicant.username|first|upper }}
+                </div>
+
+
+                <!-- MAIN CONTENT -->
+
+                <div class="applicant-main">
+
+
+                    <!-- TOP -->
+
+                    <div class="applicant-top">
+
+                        <div>
+
+                            <h2>
+                                {{ application.applicant.get_full_name|default:application.applicant.username }}
+                            </h2>
+
+                            <p class="applicant-email">
+
+                                <i class="bi bi-envelope"></i>
+
+                                {{ application.applicant.email }}
+
+                            </p>
+
+                        </div>
+
+
+                        <!-- STATUS -->
+
+                        {% if application.status == 'applied' %}
+
+                        <span class="recruiter-status recruiter-status-applied">
+
+                            <i class="bi bi-send"></i>
+
+                            Applied
+
+                        </span>
+
+
+                        {% elif application.status == 'shortlisted' %}
+
+                        <span class="recruiter-status recruiter-status-shortlisted">
+
+                            <i class="bi bi-star-fill"></i>
+
+                            Shortlisted
+
+                        </span>
+
+
+                        {% elif application.status == 'rejected' %}
+
+                        <span class="recruiter-status recruiter-status-rejected">
+
+                            <i class="bi bi-x-circle"></i>
+
+                            Rejected
+
+                        </span>
+
+
+                        {% elif application.status == 'selected' %}
+
+                        <span class="recruiter-status recruiter-status-selected">
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            Selected
+
+                        </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- JOB -->
+
+                    <div class="applicant-job">
+
+                        <div class="applicant-job-icon">
+
+                            <i class="bi bi-briefcase"></i>
+
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Applied for
+                            </span>
+
+                            <strong>
+                                {{ application.job.title }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- META -->
+
+                    <div class="applicant-meta">
+
+                        <span>
+
+                            <i class="bi bi-calendar3"></i>
+
+                            Applied
+                            {{ application.applied_at|date:"d M Y" }}
+
+                        </span>
+
+                        <span>
+
+                            <i class="bi bi-geo-alt"></i>
+
+                            {{ application.job.location }}
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- COVER LETTER -->
+
+                    {% if application.cover_letter %}
+
+                    <div class="applicant-cover-letter">
+
+                        <span>
+                            COVER LETTER
+                        </span>
+
+                        <p>
+                            {{ application.cover_letter|truncatewords:35 }}
+                        </p>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="applicant-actions">
+
+
+                        <!-- RESUME -->
+
+                        {% if application.resume %}
+
+                        <a
+                            href="{{ application.resume.url }}"
+                            target="_blank"
+                            class="resume-btn"
+                        >
+
+                            <i class="bi bi-file-earmark-pdf"></i>
+
+                            View Resume
+
+                        </a>
+
+                        {% elif application.applicant.profile.resume %}
+
+                        <a
+                            href="{{ application.applicant.profile.resume.url }}"
+                            target="_blank"
+                            class="resume-btn"
+                        >
+
+                            <i class="bi bi-file-earmark-person"></i>
+
+                            View Resume
+
+                        </a>
+
+                        {% endif %}
+
+
+                        <!-- STATUS FORM -->
+
+                        <form
+                            method="POST"
+                            action="{% url 'update_application_status' application.id %}"
+                            class="status-form"
+                        >
+
+                            {% csrf_token %}
+
+
+                            <label for="status-{{ application.id }}">
+
+                                Update Status
+
+                            </label>
+
+
+                            <select
+                                name="status"
+                                id="status-{{ application.id }}"
+                                onchange="this.form.submit()"
+                            >
+
+
+                                <!-- APPLIED -->
+
+                                <option
+                                    value="applied"
+                                    {% if application.status == 'applied' %}
+                                        selected
+                                    {% endif %}
+                                >
+
+                                    Applied
+
+                                </option>
+
+
+                                <!-- SHORTLISTED -->
+
+                                <option
+                                    value="shortlisted"
+                                    {% if application.status == 'shortlisted' %}
+                                        selected
+                                    {% endif %}
+                                >
+
+                                    Shortlisted
+
+                                </option>
+
+
+                                <!-- REJECTED -->
+
+                                <option
+                                    value="rejected"
+                                    {% if application.status == 'rejected' %}
+                                        selected
+                                    {% endif %}
+                                >
+
+                                    Rejected
+
+                                </option>
+
+
+                                <!-- SELECTED -->
+
+                                <option
+                                    value="selected"
+                                    {% if application.status == 'selected' %}
+                                        selected
+                                    {% endif %}
+                                >
+
+                                    Selected
+
+                                </option>
+
+
+                            </select>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+
+        {% else %}
+
+
+        <!-- EMPTY STATE -->
+
+        <div class="recruiter-applicants-empty">
+
+            <div class="recruiter-empty-icon">
+
+                <i class="bi bi-people"></i>
+
+            </div>
+
+            <span class="section-label">
+
+                NO APPLICANTS YET
+
+            </span>
+
+            <h2>
+
+                Your candidate list is
+
+                <span class="gradient-text">
+                    empty.
+                </span>
+
+            </h2>
+
+            <p>
+
+                Applicants will appear here when candidates
+                apply to your posted jobs.
+
+            </p>
+
+            <a
+                href="{% url 'job_create' %}"
+                class="btn-primary-custom"
+            >
+
+                Post a Job
+
+                <i class="bi bi-plus-lg"></i>
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

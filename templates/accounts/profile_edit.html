@@ -1,0 +1,288 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Edit Profile | HireHub{% endblock %}
+
+{% block content %}
+
+<div class="edit-profile-page">
+
+    <!-- Header -->
+    <section class="edit-profile-hero">
+
+        <div class="edit-profile-hero-content">
+
+            <span class="edit-profile-eyebrow">
+                PROFILE SETTINGS
+            </span>
+
+            <h1>
+                Edit your <span>profile.</span>
+            </h1>
+
+            <p>
+                Keep your professional information updated so your
+                HireHub profile always represents you accurately.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Form Area -->
+    <section class="edit-profile-container">
+
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+            class="edit-profile-form"
+        >
+
+            {% csrf_token %}
+
+
+            <!-- Personal Information -->
+            <div class="edit-profile-section">
+
+                <div class="edit-section-heading">
+
+                    <div>
+                        <span>PERSONAL INFORMATION</span>
+
+                        <h2>
+                            Tell us about yourself
+                        </h2>
+                    </div>
+
+                    <div class="edit-section-icon">
+                        <i class="bi bi-person"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="edit-form-grid">
+
+                    <!-- Phone -->
+                    <div class="edit-form-group">
+
+                        <label for="{{ form.phone.id_for_label }}">
+                            Phone Number
+                        </label>
+
+                        <div class="edit-input-wrapper">
+
+                            <i class="bi bi-telephone"></i>
+
+                            {{ form.phone }}
+
+                        </div>
+
+                        {% if form.phone.errors %}
+                            <div class="edit-form-error">
+                                {{ form.phone.errors.0 }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Location -->
+                    <div class="edit-form-group">
+
+                        <label for="{{ form.location.id_for_label }}">
+                            Location
+                        </label>
+
+                        <div class="edit-input-wrapper">
+
+                            <i class="bi bi-geo-alt"></i>
+
+                            {{ form.location }}
+
+                        </div>
+
+                        {% if form.location.errors %}
+                            <div class="edit-form-error">
+                                {{ form.location.errors.0 }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Experience -->
+                    <div class="edit-form-group">
+
+                        <label for="{{ form.experience.id_for_label }}">
+                            Experience
+                        </label>
+
+                        <div class="edit-input-wrapper">
+
+                            <i class="bi bi-briefcase"></i>
+
+                            {{ form.experience }}
+
+                            <span class="input-suffix">
+                                years
+                            </span>
+
+                        </div>
+
+                        {% if form.experience.errors %}
+                            <div class="edit-form-error">
+                                {{ form.experience.errors.0 }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Skills -->
+            <div class="edit-profile-section">
+
+                <div class="edit-section-heading">
+
+                    <div>
+                        <span>PROFESSIONAL SKILLS</span>
+
+                        <h2>
+                            What can you do?
+                        </h2>
+                    </div>
+
+                    <div class="edit-section-icon">
+                        <i class="bi bi-stars"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="edit-form-group">
+
+                    <label for="{{ form.skills.id_for_label }}">
+                        Skills
+                    </label>
+
+                    <div class="edit-textarea-wrapper">
+
+                        <i class="bi bi-code-slash"></i>
+
+                        {{ form.skills }}
+
+                    </div>
+
+                    <small class="edit-help-text">
+                        Add your skills separated by commas.
+                        Example: Python, Django, SQL, React
+                    </small>
+
+                    {% if form.skills.errors %}
+                        <div class="edit-form-error">
+                            {{ form.skills.errors.0 }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- Resume -->
+            <div class="edit-profile-section">
+
+                <div class="edit-section-heading">
+
+                    <div>
+                        <span>CAREER DOCUMENT</span>
+
+                        <h2>
+                            Your resume
+                        </h2>
+                    </div>
+
+                    <div class="edit-section-icon">
+                        <i class="bi bi-file-earmark-text"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="resume-upload-area">
+
+                    <div class="resume-upload-icon">
+                        <i class="bi bi-cloud-arrow-up"></i>
+                    </div>
+
+
+                    <div class="resume-upload-content">
+
+                        <label for="{{ form.resume.id_for_label }}">
+                            Upload your resume
+                        </label>
+
+                        {% if form.resume.value %}
+
+                            <p>
+                                Current resume:
+                                <strong>
+                                    {{ form.resume.value }}
+                                </strong>
+                            </p>
+
+                        {% else %}
+
+                            <p>
+                                PDF, DOC or DOCX files are recommended.
+                            </p>
+
+                        {% endif %}
+
+                        {{ form.resume }}
+
+                    </div>
+
+                </div>
+
+                {% if form.resume.errors %}
+                    <div class="edit-form-error">
+                        {{ form.resume.errors.0 }}
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            <!-- Form Actions -->
+            <div class="edit-profile-actions">
+
+                <a
+                    href="{% url 'profile' %}"
+                    class="edit-cancel-btn"
+                >
+                    Cancel
+                </a>
+
+                <button
+                    type="submit"
+                    class="edit-save-btn"
+                >
+                    <i class="bi bi-check2"></i>
+                    Save Changes
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+</div>
+
+{% endblock %}

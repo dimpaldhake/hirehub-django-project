@@ -1,0 +1,260 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Applications | HireHub{% endblock %}
+
+{% block content %}
+
+<div class="applications-page">
+
+    <!-- Hero -->
+    <section class="applications-hero">
+
+        <div class="applications-hero-content">
+
+            <span class="applications-eyebrow">
+                JOB SEEKER PANEL
+            </span>
+
+            <h1>
+                My <span>Applications.</span>
+            </h1>
+
+            <p>
+                Track the jobs you've applied for and monitor your
+                application progress.
+            </p>
+
+            <a href="{% url 'job_list' %}" class="browse-jobs-btn">
+                <i class="bi bi-search"></i>
+                Browse Jobs
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- Statistics -->
+    <section class="application-stats">
+
+        <div class="application-stat-card">
+            <div class="application-stat-icon purple">
+                <i class="bi bi-send"></i>
+            </div>
+
+            <div>
+                <span class="application-stat-number">
+                    {{ applications|length }}
+                </span>
+
+                <span class="application-stat-label">
+                    Total Applications
+                </span>
+            </div>
+        </div>
+
+
+        <div class="application-stat-card">
+            <div class="application-stat-icon yellow">
+                <i class="bi bi-star"></i>
+            </div>
+
+            <div>
+                <span class="application-stat-number">
+                    {% with shortlisted=applications|dictsort:"status" %}
+                    {{ applications|length }}
+                    {% endwith %}
+                </span>
+
+                <span class="application-stat-label">
+                    Applications
+                </span>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- Applications -->
+    <section class="applications-section">
+
+        <div class="applications-section-header">
+
+            <div>
+                <span class="section-mini-title">
+                    APPLICATION TRACKER
+                </span>
+
+                <h2>
+                    Your Applications
+                </h2>
+            </div>
+
+            <span class="application-count">
+                {{ applications|length }} applications
+            </span>
+
+        </div>
+
+
+        {% if applications %}
+
+            <div class="applications-list">
+
+                {% for application in applications %}
+
+                <article class="application-card">
+
+                    <!-- Company Logo -->
+                    <div class="application-company-logo">
+
+                        {% if application.job.company.logo %}
+                            <img
+                                src="{{ application.job.company.logo.url }}"
+                                alt="{{ application.job.company.company_name }}"
+                            >
+                        {% else %}
+                            <div class="company-logo-placeholder">
+                                <i class="bi bi-building"></i>
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Main Content -->
+                    <div class="application-main">
+
+                        <div class="application-title-row">
+
+                            <div>
+
+                                <h3>
+                                    {{ application.job.title }}
+                                </h3>
+
+                                <p class="application-company">
+                                    {{ application.job.company.company_name }}
+                                </p>
+
+                            </div>
+
+
+                            <div class="application-status-wrapper">
+
+                                {% if application.status == 'applied' %}
+
+                                    <span class="application-status applied">
+                                        <i class="bi bi-clock"></i>
+                                        Applied
+                                    </span>
+
+                                {% elif application.status == 'shortlisted' %}
+
+                                    <span class="application-status shortlisted">
+                                        <i class="bi bi-star-fill"></i>
+                                        Shortlisted
+                                    </span>
+
+                                {% elif application.status == 'rejected' %}
+
+                                    <span class="application-status rejected">
+                                        <i class="bi bi-x-circle-fill"></i>
+                                        Rejected
+                                    </span>
+
+                                {% elif application.status == 'selected' %}
+
+                                    <span class="application-status selected">
+                                        <i class="bi bi-check-circle-fill"></i>
+                                        Selected
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Job Meta -->
+                        <div class="application-meta">
+
+                            <span>
+                                <i class="bi bi-geo-alt"></i>
+                                {{ application.job.location }}
+                            </span>
+
+                            <span>
+                                <i class="bi bi-briefcase"></i>
+                                {{ application.job.get_job_type_display }}
+                            </span>
+
+                            <span>
+                                <i class="bi bi-calendar3"></i>
+                                Applied
+                                {{ application.applied_at|date:"d M Y" }}
+                            </span>
+
+                        </div>
+
+
+                        <!-- Bottom -->
+                        <div class="application-card-footer">
+
+                            <span class="last-updated">
+                                <i class="bi bi-arrow-repeat"></i>
+
+                                Last updated
+                                {{ application.updated_at|date:"d M Y" }}
+                            </span>
+
+
+                            <a
+                                href="{% url 'job_detail' application.job.id %}"
+                                class="view-job-btn"
+                            >
+                                View Job
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="applications-empty">
+
+                <div class="empty-icon">
+                    <i class="bi bi-file-earmark-text"></i>
+                </div>
+
+                <h3>No applications yet</h3>
+
+                <p>
+                    You haven't applied for any jobs yet.
+                    Start exploring opportunities that match your skills.
+                </p>
+
+                <a href="{% url 'job_list' %}" class="browse-jobs-btn">
+                    Explore Jobs
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+</div>
+
+{% endblock %}

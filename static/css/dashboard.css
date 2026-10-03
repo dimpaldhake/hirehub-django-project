@@ -1,0 +1,1251 @@
+/* =========================================================
+   HIREHUB DASHBOARD
+   Main dashboard styling
+========================================================= */
+
+
+/* =========================================================
+   DASHBOARD PAGE
+========================================================= */
+
+.dashboard-page {
+    min-height: calc(100vh - 90px);
+    background: #f7f8fc;
+    padding: 55px 0 80px;
+}
+
+.dashboard-page .container {
+    max-width: 1240px;
+}
+
+
+/* =========================================================
+   DASHBOARD HEADER
+========================================================= */
+
+.dashboard-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+
+    margin-bottom: 38px;
+}
+
+.dashboard-header > div {
+    max-width: 760px;
+}
+
+.section-label {
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+
+    color: #635bff;
+}
+
+.dashboard-header h1 {
+    margin: 0 0 10px;
+
+    font-size: clamp(34px, 4vw, 52px);
+    line-height: 1.12;
+    font-weight: 600;
+
+    color: #344054;
+    letter-spacing: -1.8px;
+}
+
+.gradient-text {
+    color: #7357ff;
+
+    background: linear-gradient(
+        90deg,
+        #6658ff,
+        #8b5cf6
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.dashboard-header p {
+    margin: 0;
+
+    max-width: 700px;
+
+    font-size: 16px;
+    line-height: 1.7;
+
+    color: #667085;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+.dashboard-primary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    min-height: 48px;
+
+    padding: 0 20px;
+
+    border-radius: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #6658ff,
+        #855df5
+    );
+
+    color: #ffffff !important;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    box-shadow: 0 10px 24px rgba(102, 88, 255, 0.20);
+
+    transition: all 0.25s ease;
+}
+
+.dashboard-primary-btn:hover {
+    color: #ffffff !important;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 14px 30px rgba(102, 88, 255, 0.28);
+}
+
+
+/* =========================================================
+   DASHBOARD STATISTICS
+========================================================= */
+
+.dashboard-stats {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 16px;
+
+    margin-bottom: 42px;
+}
+
+.dashboard-stat-card {
+    min-height: 115px;
+
+    padding: 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #ececf3;
+
+    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    box-shadow: 0 5px 20px rgba(31, 35, 61, 0.035);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.dashboard-stat-card:hover {
+    transform: translateY(-4px);
+
+    border-color: #e1ddff;
+
+    box-shadow: 0 14px 30px rgba(75, 65, 160, 0.09);
+}
+
+
+/* Statistic icon */
+
+.dashboard-stat-icon {
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background: linear-gradient(
+        135deg,
+        #eeecff,
+        #e9f2ff
+    );
+
+    color: #6658ff;
+
+    font-size: 21px;
+}
+
+
+/* Statistic text */
+
+.dashboard-stat-content {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+.dashboard-stat-content span {
+    margin-bottom: 5px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #8a8fa3;
+}
+
+.dashboard-stat-content strong {
+    font-size: 27px;
+    line-height: 1;
+
+    font-weight: 800;
+
+    color: #20243a;
+}
+
+
+/* =========================================================
+   DASHBOARD SECTIONS
+========================================================= */
+
+.dashboard-section {
+    margin-bottom: 48px;
+}
+
+.dashboard-section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-bottom: 20px;
+}
+
+.dashboard-section-header > div {
+    min-width: 0;
+}
+
+.dashboard-section-header .section-label {
+    margin-bottom: 7px;
+}
+
+.dashboard-section-header h2 {
+    margin: 0 0 7px;
+
+    font-size: 27px;
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    color: #252941;
+
+    letter-spacing: -0.7px;
+}
+
+.dashboard-section-header p {
+    margin: 0;
+
+    font-size: 14px;
+
+    color: #85899b;
+}
+
+.section-view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    flex-shrink: 0;
+
+    color: #635bff;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition: gap 0.2s ease;
+}
+
+.section-view-all:hover {
+    color: #5148d8;
+
+    gap: 10px;
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+========================================================= */
+
+.dashboard-actions-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 16px;
+}
+
+.dashboard-action-card {
+    position: relative;
+
+    min-height: 180px;
+
+    padding: 23px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #ffffff;
+
+    border: 1px solid #ececf3;
+
+    border-radius: 20px;
+
+    color: inherit;
+
+    text-decoration: none;
+
+    box-shadow: 0 5px 20px rgba(31, 35, 61, 0.035);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.dashboard-action-card:hover {
+    transform: translateY(-5px);
+
+    border-color: #ddd8ff;
+
+    box-shadow: 0 16px 32px rgba(75, 65, 160, 0.10);
+
+    color: inherit;
+}
+
+
+/* Action icon */
+
+.dashboard-action-icon {
+    width: 48px;
+    height: 48px;
+
+    margin-bottom: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: #eeecff;
+
+    color: #6658ff;
+
+    font-size: 20px;
+}
+
+
+/* Action content */
+
+.dashboard-action-card h3 {
+    margin: 0 0 7px;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    color: #252941;
+}
+
+.dashboard-action-card p {
+    margin: 0;
+
+    max-width: 210px;
+
+    font-size: 13px;
+    line-height: 1.6;
+
+    color: #85899b;
+}
+
+
+/* Arrow */
+
+.dashboard-action-arrow {
+    position: absolute;
+
+    top: 21px;
+    right: 21px;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f7f7fb;
+
+    color: #7168e8;
+
+    font-size: 14px;
+
+    transition: all 0.2s ease;
+}
+
+.dashboard-action-card:hover .dashboard-action-arrow {
+    background: #eeecff;
+
+    transform: translate(2px, -2px);
+}
+
+
+/* =========================================================
+   APPLICATION JOURNEY
+========================================================= */
+
+.application-journey {
+    display: flex;
+    align-items: center;
+
+    padding: 32px 35px;
+
+    background: #ffffff;
+
+    border: 1px solid #ececf3;
+
+    border-radius: 22px;
+
+    box-shadow: 0 5px 20px rgba(31, 35, 61, 0.035);
+}
+
+.journey-step {
+    flex: 1;
+
+    text-align: center;
+}
+
+.journey-icon {
+    width: 54px;
+    height: 54px;
+
+    margin: 0 auto 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 17px;
+
+    background: linear-gradient(
+        135deg,
+        #eeecff,
+        #e9f2ff
+    );
+
+    color: #6658ff;
+
+    font-size: 21px;
+}
+
+.journey-step h3 {
+    margin: 0 0 5px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    color: #292d43;
+}
+
+.journey-step p {
+    max-width: 190px;
+
+    margin: 0 auto;
+
+    font-size: 12px;
+    line-height: 1.5;
+
+    color: #8a8fa3;
+}
+
+.journey-line {
+    width: 80px;
+    height: 2px;
+
+    flex-shrink: 0;
+
+    background: linear-gradient(
+        90deg,
+        #dcd8ff,
+        #e7e4ff
+    );
+}
+
+
+/* =========================================================
+   BOTTOM CTA
+========================================================= */
+
+.dashboard-bottom-card {
+    padding: 28px 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    border-radius: 24px;
+
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(255,255,255,0.35),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #eeecff,
+            #eaf4ff
+        );
+
+    border: 1px solid #e0ddf7;
+}
+
+.dashboard-bottom-content {
+    display: flex;
+    align-items: center;
+
+    gap: 17px;
+}
+
+.dashboard-bottom-icon {
+    width: 55px;
+    height: 55px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 17px;
+
+    background: #ffffff;
+
+    color: #6658ff;
+
+    font-size: 22px;
+
+    box-shadow: 0 8px 20px rgba(75, 65, 160, 0.08);
+}
+
+.dashboard-bottom-card h2 {
+    margin: 0 0 5px;
+
+    font-size: 20px;
+    font-weight: 750;
+
+    color: #272b42;
+}
+
+.dashboard-bottom-card p {
+    margin: 0;
+
+    font-size: 13px;
+
+    color: #777c91;
+}
+
+
+/* =========================================================
+   RECENT APPLICATIONS
+========================================================= */
+
+.recent-applications {
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+.recent-application-card {
+    background: #ffffff;
+
+    border: 1px solid #eeeef5;
+
+    border-radius: 18px;
+
+    padding: 18px 20px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    transition: all 0.25s ease;
+}
+
+.recent-application-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 12px 30px rgba(75, 65, 160, 0.10);
+
+    border-color: #e2dfff;
+}
+
+.recent-application-main {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+.recent-job-icon {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+        135deg,
+        #eeecff,
+        #e6f4ff
+    );
+
+    color: #6c63ff;
+
+    font-size: 21px;
+
+    flex-shrink: 0;
+}
+
+.recent-application-main h3 {
+    margin: 0 0 5px;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    color: #17172b;
+}
+
+.recent-application-main p {
+    margin: 0 0 3px;
+
+    font-size: 13px;
+
+    color: #66677a;
+}
+
+.recent-application-main p i {
+    margin-right: 5px;
+}
+
+.recent-application-main small {
+    font-size: 12px;
+
+    color: #999aaa;
+}
+
+
+/* =========================================================
+   APPLICATION STATUS
+========================================================= */
+
+.recent-application-status,
+.recent-applicant-status {
+    flex-shrink: 0;
+}
+
+.application-status {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 8px 13px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.application-status.applied {
+    background: #eef4ff;
+    color: #4d73c9;
+}
+
+.application-status.shortlisted {
+    background: #fff6df;
+    color: #b07a00;
+}
+
+.application-status.selected {
+    background: #eaf9f0;
+    color: #21834b;
+}
+
+.application-status.rejected {
+    background: #fff0f1;
+    color: #c44750;
+}
+
+
+/* =========================================================
+   ARROW BUTTON
+========================================================= */
+
+.recent-application-arrow {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f7f7fb;
+
+    color: #6c63ff;
+
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+
+    flex-shrink: 0;
+}
+
+.recent-application-arrow:hover {
+    background: #eeecff;
+
+    color: #584fe0;
+
+    transform: translate(2px, -2px);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.dashboard-empty-state {
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px dashed #dcdbea;
+
+    border-radius: 22px;
+
+    padding: 55px 25px;
+}
+
+.dashboard-empty-icon {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eeecff;
+
+    color: #6c63ff;
+
+    font-size: 28px;
+}
+
+.dashboard-empty-state h3 {
+    margin-bottom: 8px;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    color: #19192b;
+}
+
+.dashboard-empty-state p {
+    max-width: 500px;
+
+    margin: 0 auto 22px;
+
+    color: #77788a;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   RECRUITER RECENT JOBS
+========================================================= */
+
+.recent-recruiter-jobs {
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+.recent-recruiter-job-card {
+    background: #ffffff;
+
+    border: 1px solid #eeeef5;
+
+    border-radius: 18px;
+
+    padding: 18px 20px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    transition: all 0.25s ease;
+}
+
+.recent-recruiter-job-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 12px 30px rgba(75, 65, 160, 0.10);
+
+    border-color: #e2dfff;
+}
+
+.recent-recruiter-job-info {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.recent-recruiter-job-info h3 {
+    margin: 0 0 5px;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    color: #17172b;
+}
+
+.recent-recruiter-job-info p {
+    margin: 0 0 3px;
+
+    font-size: 13px;
+
+    color: #66677a;
+}
+
+.recent-recruiter-job-info p i {
+    margin-right: 5px;
+}
+
+.recent-recruiter-job-info small {
+    font-size: 12px;
+
+    color: #999aaa;
+}
+
+
+/* Job status */
+
+.recent-recruiter-job-status {
+    flex-shrink: 0;
+}
+
+.job-active-status,
+.job-inactive-status {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 7px 12px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.job-active-status {
+    background: #eaf9f0;
+    color: #21834b;
+}
+
+.job-inactive-status {
+    background: #f1f1f5;
+    color: #77788a;
+}
+
+.job-active-status span,
+.job-inactive-status span {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: currentColor;
+}
+
+
+/* =========================================================
+   RECENT APPLICANTS
+========================================================= */
+
+.recent-applicants {
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+.recent-applicant-card {
+    background: #ffffff;
+
+    border: 1px solid #eeeef5;
+
+    border-radius: 18px;
+
+    padding: 18px 20px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    transition: all 0.25s ease;
+}
+
+.recent-applicant-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 12px 30px rgba(75, 65, 160, 0.10);
+
+    border-color: #e2dfff;
+}
+
+
+/* Applicant avatar */
+
+.recent-applicant-avatar {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+        135deg,
+        #eeecff,
+        #e6f4ff
+    );
+
+    color: #6c63ff;
+
+    font-size: 21px;
+
+    flex-shrink: 0;
+}
+
+.recent-applicant-avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* Applicant information */
+
+.recent-applicant-info {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.recent-applicant-info h3 {
+    margin: 0 0 5px;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    color: #17172b;
+}
+
+.recent-applicant-info p {
+    margin: 0 0 3px;
+
+    font-size: 13px;
+
+    color: #66677a;
+}
+
+.recent-applicant-info p strong {
+    color: #5148d8;
+}
+
+.recent-applicant-info small {
+    font-size: 12px;
+
+    color: #999aaa;
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 991px) {
+
+    .dashboard-page {
+        padding-top: 40px;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-header {
+        align-items: flex-start;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+
+    .dashboard-page {
+        padding: 35px 0 60px;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        margin-bottom: 30px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 34px;
+    }
+
+    .dashboard-header p {
+        font-size: 14px;
+    }
+
+    .dashboard-primary-btn {
+        min-height: 44px;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+
+        margin-bottom: 35px;
+    }
+
+    .dashboard-stat-card {
+        min-height: 95px;
+    }
+
+    .dashboard-section {
+        margin-bottom: 38px;
+    }
+
+    .dashboard-section-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .dashboard-section-header h2 {
+        font-size: 23px;
+    }
+
+    .dashboard-actions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .application-journey {
+        flex-direction: column;
+
+        gap: 18px;
+
+        padding: 25px 20px;
+    }
+
+    .journey-step {
+        width: 100%;
+    }
+
+    .journey-line {
+        width: 2px;
+        height: 35px;
+    }
+
+    .dashboard-bottom-card {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .dashboard-bottom-content {
+        align-items: flex-start;
+    }
+
+    .recent-application-card,
+    .recent-recruiter-job-card,
+    .recent-applicant-card {
+        flex-wrap: wrap;
+
+        align-items: flex-start;
+    }
+
+    .recent-application-main,
+    .recent-recruiter-job-info,
+    .recent-applicant-info {
+        flex: 1;
+    }
+
+    .recent-recruiter-job-status,
+    .recent-applicant-status {
+        margin-left: 66px;
+    }
+
+    .recent-application-arrow {
+        margin-left: auto;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .dashboard-header h1 {
+        font-size: 29px;
+
+        letter-spacing: -1px;
+    }
+
+    .dashboard-stat-card {
+        padding: 17px;
+    }
+
+    .dashboard-stat-icon {
+        width: 46px;
+        height: 46px;
+    }
+
+    .dashboard-stat-content strong {
+        font-size: 24px;
+    }
+
+    .dashboard-action-card {
+        min-height: 160px;
+
+        padding: 20px;
+    }
+
+    .recent-application-card,
+    .recent-recruiter-job-card,
+    .recent-applicant-card {
+        padding: 15px;
+    }
+
+    .recent-recruiter-job-info h3,
+    .recent-applicant-info h3,
+    .recent-application-main h3 {
+        font-size: 14px;
+    }
+
+    .recent-recruiter-job-info p,
+    .recent-applicant-info p,
+    .recent-application-main p {
+        font-size: 12px;
+    }
+
+    .recent-recruiter-job-status,
+    .recent-applicant-status {
+        margin-left: 0;
+    }
+
+    .application-status {
+        padding: 7px 10px;
+
+        font-size: 11px;
+    }
+
+    .dashboard-bottom-card {
+        padding: 22px;
+    }
+
+    .dashboard-bottom-card h2 {
+        font-size: 17px;
+    }
+
+}

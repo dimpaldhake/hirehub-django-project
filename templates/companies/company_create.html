@@ -1,0 +1,288 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Create Company | HireHub
+{% endblock %}
+
+{% block content %}
+
+<section class="company-create-page">
+
+    <div class="company-create-container">
+
+        <!-- Back -->
+
+        <a
+            href="{% url 'dashboard' %}"
+            class="company-create-back"
+        >
+            <i class="bi bi-arrow-left"></i>
+            Back to Dashboard
+        </a>
+
+
+        <!-- Header -->
+
+        <div class="company-create-header">
+
+            <span class="company-create-eyebrow">
+                <i class="bi bi-building-add"></i>
+                RECRUITER SETUP
+            </span>
+
+            <h1>
+                Introduce your
+                <span>company.</span>
+            </h1>
+
+            <p>
+                Create your company profile so candidates can learn
+                about your organization when they explore your jobs.
+            </p>
+
+        </div>
+
+
+        <!-- Form -->
+
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+            class="company-create-form"
+        >
+
+            {% csrf_token %}
+
+
+            {% if form.non_field_errors %}
+
+                <div class="company-create-errors">
+
+                    {% for error in form.non_field_errors %}
+
+                        <div>
+                            <i class="bi bi-exclamation-circle"></i>
+                            {{ error }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- COMPANY INFORMATION -->
+
+            <div class="company-create-card">
+
+                <div class="company-create-card-heading">
+
+                    <div class="company-create-icon">
+                        <i class="bi bi-buildings"></i>
+                    </div>
+
+                    <div>
+                        <span>01</span>
+
+                        <h2>Company Information</h2>
+
+                        <p>
+                            Tell candidates who you are.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="company-create-grid">
+
+
+                    <!-- Company Name -->
+
+                    <div class="company-create-field company-create-field-full">
+
+                        <label for="{{ form.company_name.id_for_label }}">
+                            Company Name
+                            <span>*</span>
+                        </label>
+
+                        {{ form.company_name }}
+
+                        {% if form.company_name.errors %}
+
+                            <div class="company-create-field-error">
+                                {{ form.company_name.errors.0 }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Location -->
+
+                    <div class="company-create-field">
+
+                        <label for="{{ form.location.id_for_label }}">
+                            Location
+                            <span>*</span>
+                        </label>
+
+                        {{ form.location }}
+
+                        {% if form.location.errors %}
+
+                            <div class="company-create-field-error">
+                                {{ form.location.errors.0 }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Website -->
+
+                    <div class="company-create-field">
+
+                        <label for="{{ form.website.id_for_label }}">
+                            Website
+                        </label>
+
+                        {{ form.website }}
+
+                        <small>
+                            Example: https://yourcompany.com
+                        </small>
+
+                        {% if form.website.errors %}
+
+                            <div class="company-create-field-error">
+                                {{ form.website.errors.0 }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Description -->
+
+                    <div class="company-create-field company-create-field-full">
+
+                        <label for="{{ form.description.id_for_label }}">
+                            Company Description
+                            <span>*</span>
+                        </label>
+
+                        {{ form.description }}
+
+                        <small>
+                            Describe your company, culture, products
+                            or services and work environment.
+                        </small>
+
+                        {% if form.description.errors %}
+
+                            <div class="company-create-field-error">
+                                {{ form.description.errors.0 }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- BRANDING -->
+
+            <div class="company-create-card">
+
+                <div class="company-create-card-heading">
+
+                    <div class="company-create-icon">
+                        <i class="bi bi-image"></i>
+                    </div>
+
+                    <div>
+                        <span>02</span>
+
+                        <h2>Company Branding</h2>
+
+                        <p>
+                            Give your company a recognizable identity.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="company-create-upload">
+
+                    <div class="company-create-upload-icon">
+                        <i class="bi bi-cloud-arrow-up"></i>
+                    </div>
+
+
+                    <div class="company-create-upload-content">
+
+                        <label
+                            for="{{ form.logo.id_for_label }}"
+                            class="company-create-upload-label"
+                        >
+                            Upload Company Logo
+                        </label>
+
+                        {{ form.logo }}
+
+                        <p>
+                            Use a clear JPG, JPEG or PNG image.
+                        </p>
+
+                        {% if form.logo.errors %}
+
+                            <div class="company-create-field-error">
+                                {{ form.logo.errors.0 }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="company-create-actions">
+
+                <a
+                    href="{% url 'dashboard' %}"
+                    class="company-create-cancel"
+                >
+                    Cancel
+                </a>
+
+                <button
+                    type="submit"
+                    class="company-create-submit"
+                >
+                    <i class="bi bi-building-add"></i>
+                    Create Company
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

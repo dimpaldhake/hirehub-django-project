@@ -1,0 +1,441 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Job Seeker Dashboard | HireHub{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-page">
+
+    <div class="container">
+
+        <!-- ================= HEADER ================= -->
+        <div class="dashboard-header">
+
+            <div>
+                <span class="section-label">JOB SEEKER DASHBOARD</span>
+
+                <h1>
+                    Welcome back,
+                    <span class="gradient-text">{{ user.username }}</span> 👋
+                </h1>
+
+                <p>
+                    Track your applications, discover new opportunities,
+                    and move closer to your next career goal.
+                </p>
+            </div>
+
+            <a href="{% url 'job_list' %}" class="dashboard-primary-btn">
+                <i class="bi bi-search"></i>
+                Find Jobs
+            </a>
+
+        </div>
+
+
+        <!-- ================= STATISTICS ================= -->
+        <div class="dashboard-stats">
+
+            <!-- Total -->
+            <div class="dashboard-stat-card">
+                <div class="dashboard-stat-icon">
+                    <i class="bi bi-briefcase"></i>
+                </div>
+
+                <div class="dashboard-stat-content">
+                    <span>Total Applications</span>
+                    <strong>{{ total_applications }}</strong>
+                </div>
+            </div>
+
+
+            <!-- Applied -->
+            <div class="dashboard-stat-card">
+                <div class="dashboard-stat-icon">
+                    <i class="bi bi-clock"></i>
+                </div>
+
+                <div class="dashboard-stat-content">
+                    <span>Applied</span>
+                    <strong>{{ applied_count }}</strong>
+                </div>
+            </div>
+
+
+            <!-- Shortlisted -->
+            <div class="dashboard-stat-card">
+                <div class="dashboard-stat-icon">
+                    <i class="bi bi-star"></i>
+                </div>
+
+                <div class="dashboard-stat-content">
+                    <span>Shortlisted</span>
+                    <strong>{{ shortlisted_count }}</strong>
+                </div>
+            </div>
+
+
+            <!-- Selected -->
+            <div class="dashboard-stat-card">
+                <div class="dashboard-stat-icon">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+
+                <div class="dashboard-stat-content">
+                    <span>Selected</span>
+                    <strong>{{ selected_count }}</strong>
+                </div>
+            </div>
+
+
+            <!-- Rejected -->
+            <div class="dashboard-stat-card">
+                <div class="dashboard-stat-icon">
+                    <i class="bi bi-x-circle"></i>
+                </div>
+
+                <div class="dashboard-stat-content">
+                    <span>Rejected</span>
+                    <strong>{{ rejected_count }}</strong>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- ================= RECENT APPLICATIONS ================= -->
+        <section class="dashboard-section">
+
+            <div class="dashboard-section-header">
+
+                <div>
+                    <span class="section-label">YOUR ACTIVITY</span>
+
+                    <h2>Recent Applications</h2>
+
+                    <p>
+                        Your latest job applications and their current status.
+                    </p>
+                </div>
+
+                <a href="{% url 'my_applications' %}" class="section-view-all">
+                    View All
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+
+            </div>
+
+
+            {% if recent_applications %}
+
+            <div class="recent-applications">
+
+                {% for application in recent_applications %}
+
+                <div class="recent-application-card">
+
+                    <!-- Company / Job -->
+                    <div class="recent-application-main">
+
+                        <div class="recent-job-icon">
+                            <i class="bi bi-building"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                {{ application.job.title }}
+                            </h3>
+
+                            <p>
+                                <i class="bi bi-building"></i>
+                                {{ application.job.company.company_name }}
+                            </p>
+
+                            <small>
+                                Applied on
+                                {{ application.applied_at|date:"d M Y" }}
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Status -->
+                    <div class="recent-application-status">
+
+                        {% if application.status == 'applied' %}
+
+                            <span class="application-status applied">
+                                <i class="bi bi-clock"></i>
+                                Applied
+                            </span>
+
+                        {% elif application.status == 'shortlisted' %}
+
+                            <span class="application-status shortlisted">
+                                <i class="bi bi-star"></i>
+                                Shortlisted
+                            </span>
+
+                        {% elif application.status == 'selected' %}
+
+                            <span class="application-status selected">
+                                <i class="bi bi-check-circle"></i>
+                                Selected
+                            </span>
+
+                        {% elif application.status == 'rejected' %}
+
+                            <span class="application-status rejected">
+                                <i class="bi bi-x-circle"></i>
+                                Rejected
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- View Job -->
+                    <a href="{% url 'job_detail' application.job.id %}"
+                       class="recent-application-arrow">
+
+                        <i class="bi bi-arrow-up-right"></i>
+
+                    </a>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <!-- Empty State -->
+            <div class="dashboard-empty-state">
+
+                <div class="dashboard-empty-icon">
+                    <i class="bi bi-briefcase"></i>
+                </div>
+
+                <h3>No applications yet</h3>
+
+                <p>
+                    You haven't applied for any jobs yet.
+                    Explore available opportunities and start your journey.
+                </p>
+
+                <a href="{% url 'job_list' %}" class="dashboard-primary-btn">
+                    <i class="bi bi-search"></i>
+                    Explore Jobs
+                </a>
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- ================= QUICK ACTIONS ================= -->
+        <section class="dashboard-section">
+
+            <div class="dashboard-section-header">
+
+                <div>
+                    <span class="section-label">QUICK ACTIONS</span>
+
+                    <h2>Manage Your Career</h2>
+
+                    <p>
+                        Everything you need to manage your job search.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-actions-grid">
+
+                <!-- Find Jobs -->
+                <a href="{% url 'job_list' %}" class="dashboard-action-card">
+
+                    <div class="dashboard-action-icon">
+                        <i class="bi bi-search"></i>
+                    </div>
+
+                    <div>
+                        <h3>Find Jobs</h3>
+
+                        <p>
+                            Search for jobs that match your skills.
+                        </p>
+                    </div>
+
+                    <div class="dashboard-action-arrow">
+                        <i class="bi bi-arrow-up-right"></i>
+                    </div>
+
+                </a>
+
+
+                <!-- Applications -->
+                <a href="{% url 'my_applications' %}" class="dashboard-action-card">
+
+                    <div class="dashboard-action-icon">
+                        <i class="bi bi-file-earmark-text"></i>
+                    </div>
+
+                    <div>
+                        <h3>My Applications</h3>
+
+                        <p>
+                            Track all your submitted applications.
+                        </p>
+                    </div>
+
+                    <div class="dashboard-action-arrow">
+                        <i class="bi bi-arrow-up-right"></i>
+                    </div>
+
+                </a>
+
+
+                <!-- Profile -->
+                <a href="{% url 'profile' %}" class="dashboard-action-card">
+
+                    <div class="dashboard-action-icon">
+                        <i class="bi bi-person"></i>
+                    </div>
+
+                    <div>
+                        <h3>My Profile</h3>
+
+                        <p>
+                            Keep your professional profile updated.
+                        </p>
+                    </div>
+
+                    <div class="dashboard-action-arrow">
+                        <i class="bi bi-arrow-up-right"></i>
+                    </div>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= APPLICATION JOURNEY ================= -->
+        <section class="dashboard-section">
+
+            <div class="dashboard-section-header">
+
+                <div>
+                    <span class="section-label">YOUR JOURNEY</span>
+
+                    <h2>Application Journey</h2>
+
+                    <p>
+                        Understand the typical hiring process.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="application-journey">
+
+                <div class="journey-step">
+
+                    <div class="journey-icon">
+                        <i class="bi bi-send"></i>
+                    </div>
+
+                    <h3>Applied</h3>
+
+                    <p>
+                        Your application has been submitted.
+                    </p>
+
+                </div>
+
+
+                <div class="journey-line"></div>
+
+
+                <div class="journey-step">
+
+                    <div class="journey-icon">
+                        <i class="bi bi-star"></i>
+                    </div>
+
+                    <h3>Shortlisted</h3>
+
+                    <p>
+                        Recruiter has shortlisted your profile.
+                    </p>
+
+                </div>
+
+
+                <div class="journey-line"></div>
+
+
+                <div class="journey-step">
+
+                    <div class="journey-icon">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+
+                    <h3>Selected</h3>
+
+                    <p>
+                        You have successfully been selected.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= BOTTOM CTA ================= -->
+        <div class="dashboard-bottom-card">
+
+            <div class="dashboard-bottom-content">
+
+                <div class="dashboard-bottom-icon">
+                    <i class="bi bi-rocket-takeoff"></i>
+                </div>
+
+                <div>
+
+                    <h2>Ready for your next opportunity?</h2>
+
+                    <p>
+                        Explore new jobs and take the next step in your career.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <a href="{% url 'job_list' %}" class="dashboard-primary-btn">
+                Explore Jobs
+                <i class="bi bi-arrow-right"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

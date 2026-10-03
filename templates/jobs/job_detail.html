@@ -1,0 +1,660 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ job.title }} | HireHub
+{% endblock %}
+
+{% block content %}
+
+<section class="job-detail-page">
+
+    <div class="job-detail-container">
+
+        <!-- BACK -->
+        <a href="{% url 'job_list' %}" class="job-back-link">
+            <i class="bi bi-arrow-left"></i>
+            Back to Jobs
+        </a>
+
+
+        <!-- =====================================================
+             JOB HERO
+        ====================================================== -->
+
+        <div class="job-detail-hero">
+
+            <div class="job-hero-left">
+
+                <!-- COMPANY LOGO -->
+
+                <div class="job-detail-company-logo">
+
+                    {% if job.company.logo %}
+
+                        <img
+                            src="{{ job.company.logo.url }}"
+                            alt="{{ job.company.company_name }}"
+                        >
+
+                    {% else %}
+
+                        <span>
+                            {{ job.company.company_name|first|upper }}
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- JOB TITLE -->
+
+                <div class="job-detail-heading">
+
+                    <div class="job-detail-status-row">
+
+                        {% if job.is_active %}
+
+                            <span class="job-active-badge">
+                                <span></span>
+                                Active
+                            </span>
+
+                        {% else %}
+
+                            <span class="job-closed-badge">
+                                Closed
+                            </span>
+
+                        {% endif %}
+
+                        <span class="job-type-badge">
+                            {{ job.get_job_type_display }}
+                        </span>
+
+                    </div>
+
+
+                    <h1>
+                        {{ job.title }}
+                    </h1>
+
+
+                    <p class="job-detail-company-name">
+
+                        <i class="bi bi-building"></i>
+
+                        {{ job.company.company_name }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK SALARY -->
+
+            <div class="job-hero-salary">
+
+                <span>
+                    SALARY
+                </span>
+
+                <strong>
+
+                    {% if job.salary_min and job.salary_max %}
+
+                        ₹{{ job.salary_min|floatformat:0 }}
+                        –
+                        ₹{{ job.salary_max|floatformat:0 }}
+
+                    {% elif job.salary_min %}
+
+                        From ₹{{ job.salary_min|floatformat:0 }}
+
+                    {% elif job.salary_max %}
+
+                        Up to ₹{{ job.salary_max|floatformat:0 }}
+
+                    {% else %}
+
+                        Not disclosed
+
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             MAIN GRID
+        ====================================================== -->
+
+        <div class="job-detail-grid">
+
+
+            <!-- =================================================
+                 LEFT CONTENT
+            ================================================== -->
+
+            <main class="job-detail-main">
+
+
+                <!-- JOB OVERVIEW -->
+
+                <div class="job-detail-card">
+
+                    <div class="detail-card-title">
+
+                        <div class="detail-title-icon">
+                            <i class="bi bi-grid"></i>
+                        </div>
+
+                        <div>
+                            <span>
+                                JOB OVERVIEW
+                            </span>
+
+                            <h2>
+                                Role Details
+                            </h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="job-overview-grid">
+
+
+                        <!-- LOCATION -->
+
+                        <div class="overview-item">
+
+                            <div class="overview-icon">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+
+                            <div>
+                                <span>Location</span>
+
+                                <strong>
+                                    {{ job.location }}
+                                </strong>
+                            </div>
+
+                        </div>
+
+
+                        <!-- JOB TYPE -->
+
+                        <div class="overview-item">
+
+                            <div class="overview-icon">
+                                <i class="bi bi-briefcase"></i>
+                            </div>
+
+                            <div>
+                                <span>Job Type</span>
+
+                                <strong>
+                                    {{ job.get_job_type_display }}
+                                </strong>
+                            </div>
+
+                        </div>
+
+
+                        <!-- EXPERIENCE -->
+
+                        <div class="overview-item">
+
+                            <div class="overview-icon">
+                                <i class="bi bi-person-workspace"></i>
+                            </div>
+
+                            <div>
+                                <span>Experience</span>
+
+                                <strong>
+
+                                    {% if job.experience == 0 %}
+
+                                        Fresher
+
+                                    {% elif job.experience == 1 %}
+
+                                        1 Year
+
+                                    {% else %}
+
+                                        {{ job.experience }} Years
+
+                                    {% endif %}
+
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- CATEGORY -->
+
+                        {% if job.category %}
+
+                            <div class="overview-item">
+
+                                <div class="overview-icon">
+                                    <i class="bi bi-layers"></i>
+                                </div>
+
+                                <div>
+                                    <span>Category</span>
+
+                                    <strong>
+                                        {{ job.category.name }}
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <!-- DEADLINE -->
+
+                        <div class="overview-item">
+
+                            <div class="overview-icon">
+                                <i class="bi bi-calendar-event"></i>
+                            </div>
+
+                            <div>
+                                <span>Apply Before</span>
+
+                                <strong>
+                                    {{ job.deadline|date:"d M Y" }}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     DESCRIPTION
+                ================================================== -->
+
+                <div class="job-detail-card">
+
+                    <div class="detail-card-title">
+
+                        <div class="detail-title-icon">
+                            <i class="bi bi-file-text"></i>
+                        </div>
+
+                        <div>
+
+                            <span>
+                                ABOUT THE ROLE
+                            </span>
+
+                            <h2>
+                                Job Description
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="job-description">
+
+                        {{ job.description|linebreaks }}
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     SKILLS
+                ================================================== -->
+
+                <div class="job-detail-card">
+
+                    <div class="detail-card-title">
+
+                        <div class="detail-title-icon">
+                            <i class="bi bi-stars"></i>
+                        </div>
+
+                        <div>
+
+                            <span>
+                                REQUIREMENTS
+                            </span>
+
+                            <h2>
+                                Skills & Technologies
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="job-detail-skills">
+
+                        {% for skill in skills %}
+
+                            <span>
+                                {{ skill }}
+                            </span>
+
+                        {% empty %}
+
+                            <span>
+                                No specific skills listed
+                            </span>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     DEADLINE
+                ================================================== -->
+
+                <div class="job-deadline-card">
+
+                    <div class="deadline-icon">
+
+                        <i class="bi bi-calendar-check"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            APPLICATION DEADLINE
+                        </span>
+
+                        <h3>
+                            {{ job.deadline|date:"d F Y" }}
+                        </h3>
+
+                        <p>
+                            Make sure your application is submitted
+                            before the deadline.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </main>
+
+
+            <!-- =================================================
+                 RIGHT SIDEBAR
+            ================================================== -->
+
+            <aside class="job-detail-sidebar">
+
+
+                <!-- =================================================
+                     APPLY CARD
+                ================================================== -->
+
+                <div class="job-apply-card">
+
+                    <span class="apply-card-label">
+                        READY TO APPLY?
+                    </span>
+
+
+                    <h2>
+                        Take the next
+                        <span>step.</span>
+                    </h2>
+
+
+                    <p>
+                        Your next career opportunity could start
+                        with this application.
+                    </p>
+
+
+                    {% if job.is_active %}
+
+
+                        {% if user.is_authenticated %}
+
+
+                            {% if user.profile.user_type == 'job_seeker' %}
+
+
+                                {% if already_applied %}
+
+                                    <!-- ALREADY APPLIED -->
+
+                                    <div class="apply-info-message">
+
+                                        <i class="bi bi-check-circle"></i>
+
+                                        You have already applied
+                                        for this job.
+
+                                    </div>
+
+
+                                {% else %}
+
+                                    <!-- APPLY NOW -->
+
+                                    <a
+                                        href="{% url 'apply_job' job.id %}"
+                                        class="apply-now-btn"
+                                    >
+
+                                        Apply Now
+
+                                        <i class="bi bi-arrow-right"></i>
+
+                                    </a>
+
+                                {% endif %}
+
+
+                            {% else %}
+
+                                <!-- RECRUITER -->
+
+                                <div class="apply-info-message">
+
+                                    <i class="bi bi-info-circle"></i>
+
+                                    Only job seekers can apply.
+
+                                </div>
+
+                            {% endif %}
+
+
+                        {% else %}
+
+                            <!-- NOT LOGGED IN -->
+
+                            <a
+                                href="{% url 'login' %}?next={% url 'apply_job' job.id %}"
+                                class="apply-now-btn"
+                            >
+
+                                Login to Apply
+
+                                <i class="bi bi-arrow-right"></i>
+
+                            </a>
+
+                        {% endif %}
+
+
+                    {% else %}
+
+                        <!-- CLOSED JOB -->
+
+                        <div class="apply-closed-message">
+
+                            <i class="bi bi-lock"></i>
+
+                            Applications are closed.
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- =================================================
+                     COMPANY
+                ================================================== -->
+
+                <div class="job-company-card">
+
+                    <span class="sidebar-card-label">
+                        ABOUT THE COMPANY
+                    </span>
+
+
+                    <div class="company-card-heading">
+
+                        <div class="company-card-logo">
+
+                            {% if job.company.logo %}
+
+                                <img
+                                    src="{{ job.company.logo.url }}"
+                                    alt="{{ job.company.company_name }}"
+                                >
+
+                            {% else %}
+
+                                {{ job.company.company_name|first|upper }}
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                {{ job.company.company_name }}
+                            </h3>
+
+                            <span>
+
+                                <i class="bi bi-geo-alt"></i>
+
+                                {{ job.company.location|default:job.location }}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    {% if job.company.description %}
+
+                        <p class="company-description">
+
+                            {{ job.company.description|truncatewords:35 }}
+
+                        </p>
+
+                    {% endif %}
+
+
+                    {% if job.company.website %}
+
+                        <a
+                            href="{{ job.company.website }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="company-website-btn"
+                        >
+
+                            Visit Company Website
+
+                            <i class="bi bi-arrow-up-right"></i>
+
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- =================================================
+                     RECRUITER ACTION
+                ================================================== -->
+
+                {% if user.is_authenticated and user == job.company.recruiter %}
+
+                    <div class="recruiter-manage-card">
+
+                        <span>
+                            RECRUITER ACTION
+                        </span>
+
+                        <h3>
+                            Manage this job
+                        </h3>
+
+                        <p>
+                            Need to make changes to this
+                            opportunity?
+                        </p>
+
+                        <a
+                            href="{% url 'job_edit' job.pk %}"
+                            class="edit-job-btn"
+                        >
+
+                            <i class="bi bi-pencil-square"></i>
+
+                            Edit Job
+
+                        </a>
+
+                    </div>
+
+                {% endif %}
+
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

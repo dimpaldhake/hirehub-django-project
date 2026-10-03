@@ -1,0 +1,628 @@
+{% extends 'base.html' %}
+
+{% block title %}Recruiter Dashboard | HireHub{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-page">
+
+    <div class="container">
+
+        <!-- ================= HEADER ================= -->
+        <div class="dashboard-header">
+
+            <div>
+                <span class="section-label">RECRUITER DASHBOARD</span>
+
+                <h1>
+                    Welcome back,
+                    <span class="gradient-text">{{ user.username }}</span> 👋
+                </h1>
+
+                <p>
+                    Manage your hiring pipeline, jobs and candidates
+                    from one powerful workspace.
+                </p>
+            </div>
+
+            <a href="{% url 'job_create' %}" class="dashboard-primary-btn">
+                <i class="bi bi-plus-lg"></i>
+                Post a Job
+            </a>
+
+        </div>
+
+
+        <!-- ================= STATISTICS ================= -->
+        <div class="dashboard-stats">
+
+            <div class="dashboard-stat-card">
+
+                <div class="dashboard-stat-icon">
+                    <i class="bi bi-briefcase"></i>
+                </div>
+
+                <div class="dashboard-stat-content">
+                    <span>Total Jobs</span>
+                    <strong>{{ total_jobs }}</strong>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-stat-card">
+
+                <div class="dashboard-stat-icon">
+                    <i class="bi bi-lightning-charge"></i>
+                </div>
+
+                <div class="dashboard-stat-content">
+                    <span>Active Jobs</span>
+                    <strong>{{ active_jobs }}</strong>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-stat-card">
+
+                <div class="dashboard-stat-icon">
+                    <i class="bi bi-people"></i>
+                </div>
+
+                <div class="dashboard-stat-content">
+                    <span>Total Applicants</span>
+                    <strong>{{ total_applicants }}</strong>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-stat-card">
+
+                <div class="dashboard-stat-icon">
+                    <i class="bi bi-star"></i>
+                </div>
+
+                <div class="dashboard-stat-content">
+                    <span>Shortlisted</span>
+                    <strong>{{ shortlisted_count }}</strong>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-stat-card">
+
+                <div class="dashboard-stat-icon">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+
+                <div class="dashboard-stat-content">
+                    <span>Selected</span>
+                    <strong>{{ selected_count }}</strong>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-stat-card">
+
+                <div class="dashboard-stat-icon">
+                    <i class="bi bi-x-circle"></i>
+                </div>
+
+                <div class="dashboard-stat-content">
+                    <span>Rejected</span>
+                    <strong>{{ rejected_count }}</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= RECENT JOBS ================= -->
+        <section class="dashboard-section">
+
+            <div class="dashboard-section-header">
+
+                <div>
+                    <span class="section-label">YOUR JOBS</span>
+
+                    <h2>Recent Jobs</h2>
+
+                    <p>
+                        Manage the latest opportunities posted by you.
+                    </p>
+                </div>
+
+                <a href="{% url 'my_jobs' %}" class="section-view-all">
+                    View All
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+
+            </div>
+
+
+            {% if recent_jobs %}
+
+            <div class="recent-recruiter-jobs">
+
+                {% for job in recent_jobs %}
+
+                <div class="recent-recruiter-job-card">
+
+                    <!-- Job icon -->
+                    <div class="recent-job-icon">
+                        <i class="bi bi-briefcase"></i>
+                    </div>
+
+
+                    <!-- Job information -->
+                    <div class="recent-recruiter-job-info">
+
+                        <h3>
+                            {{ job.title }}
+                        </h3>
+
+                        <p>
+                            <i class="bi bi-geo-alt"></i>
+                            {{ job.location }}
+                        </p>
+
+                        <small>
+                            Posted
+                            {{ job.created_at|date:"d M Y" }}
+                        </small>
+
+                    </div>
+
+
+                    <!-- Job status -->
+                    <div class="recent-recruiter-job-status">
+
+                        {% if job.is_active %}
+
+                            <span class="job-active-status">
+                                <span></span>
+                                Active
+                            </span>
+
+                        {% else %}
+
+                            <span class="job-inactive-status">
+                                <span></span>
+                                Inactive
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- View -->
+                    <a href="{% url 'job_detail' job.id %}"
+                       class="recent-application-arrow">
+
+                        <i class="bi bi-arrow-up-right"></i>
+
+                    </a>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <div class="dashboard-empty-state">
+
+                <div class="dashboard-empty-icon">
+                    <i class="bi bi-briefcase"></i>
+                </div>
+
+                <h3>No jobs posted yet</h3>
+
+                <p>
+                    Create your first job opportunity and start
+                    connecting with talented candidates.
+                </p>
+
+                <a href="{% url 'job_create' %}"
+                   class="dashboard-primary-btn">
+
+                    <i class="bi bi-plus-lg"></i>
+                    Post Your First Job
+
+                </a>
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- ================= RECENT APPLICANTS ================= -->
+        <section class="dashboard-section">
+
+            <div class="dashboard-section-header">
+
+                <div>
+                    <span class="section-label">HIRING PIPELINE</span>
+
+                    <h2>Recent Applicants</h2>
+
+                    <p>
+                        Review candidates who recently applied to your jobs.
+                    </p>
+                </div>
+
+                <a href="{% url 'recruiter_applicants' %}"
+                   class="section-view-all">
+
+                    View All
+                    <i class="bi bi-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+
+            {% if recent_applicants %}
+
+            <div class="recent-applicants">
+
+                {% for application in recent_applicants %}
+
+                <div class="recent-applicant-card">
+
+                    <!-- Applicant avatar -->
+                    <div class="recent-applicant-avatar">
+
+                        {% if application.applicant.profile.profile_picture %}
+
+                            <img
+                                src="{{ application.applicant.profile.profile_picture.url }}"
+                                alt="{{ application.applicant.username }}"
+                            >
+
+                        {% else %}
+
+                            <i class="bi bi-person"></i>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Candidate information -->
+                    <div class="recent-applicant-info">
+
+                        <h3>
+                            {{ application.applicant.username }}
+                        </h3>
+
+                        <p>
+                            Applied for
+                            <strong>{{ application.job.title }}</strong>
+                        </p>
+
+                        <small>
+                            {{ application.applied_at|date:"d M Y" }}
+                        </small>
+
+                    </div>
+
+
+                    <!-- Application status -->
+                    <div class="recent-applicant-status">
+
+                        {% if application.status == 'applied' %}
+
+                            <span class="application-status applied">
+                                <i class="bi bi-clock"></i>
+                                Applied
+                            </span>
+
+                        {% elif application.status == 'shortlisted' %}
+
+                            <span class="application-status shortlisted">
+                                <i class="bi bi-star"></i>
+                                Shortlisted
+                            </span>
+
+                        {% elif application.status == 'selected' %}
+
+                            <span class="application-status selected">
+                                <i class="bi bi-check-circle"></i>
+                                Selected
+                            </span>
+
+                        {% elif application.status == 'rejected' %}
+
+                            <span class="application-status rejected">
+                                <i class="bi bi-x-circle"></i>
+                                Rejected
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Candidate details -->
+                    <a href="{% url 'recruiter_application_detail' application.id %}"
+                       class="recent-application-arrow">
+
+                        <i class="bi bi-arrow-up-right"></i>
+
+                    </a>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <div class="dashboard-empty-state">
+
+                <div class="dashboard-empty-icon">
+                    <i class="bi bi-people"></i>
+                </div>
+
+                <h3>No applicants yet</h3>
+
+                <p>
+                    Applicants will appear here once candidates
+                    start applying to your jobs.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- ================= RECRUITMENT TOOLS ================= -->
+        <section class="dashboard-section">
+
+            <div class="dashboard-section-header">
+
+                <div>
+                    <span class="section-label">RECRUITMENT TOOLS</span>
+
+                    <h2>Manage Your Hiring</h2>
+
+                    <p>
+                        Access the tools you need to manage your recruitment process.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-actions-grid">
+
+                <!-- Post Job -->
+                <a href="{% url 'job_create' %}"
+                   class="dashboard-action-card">
+
+                    <div class="dashboard-action-icon">
+                        <i class="bi bi-plus-circle"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>Post a Job</h3>
+
+                        <p>
+                            Create a new job opportunity.
+                        </p>
+
+                    </div>
+
+                    <div class="dashboard-action-arrow">
+                        <i class="bi bi-arrow-up-right"></i>
+                    </div>
+
+                </a>
+
+
+                <!-- My Jobs -->
+                <a href="{% url 'my_jobs' %}"
+                   class="dashboard-action-card">
+
+                    <div class="dashboard-action-icon">
+                        <i class="bi bi-briefcase"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>My Jobs</h3>
+
+                        <p>
+                            Manage your posted jobs.
+                        </p>
+
+                    </div>
+
+                    <div class="dashboard-action-arrow">
+                        <i class="bi bi-arrow-up-right"></i>
+                    </div>
+
+                </a>
+
+
+                <!-- Applicants -->
+                <a href="{% url 'recruiter_applicants' %}"
+                   class="dashboard-action-card">
+
+                    <div class="dashboard-action-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>Applicants</h3>
+
+                        <p>
+                            Review and manage candidates.
+                        </p>
+
+                    </div>
+
+                    <div class="dashboard-action-arrow">
+                        <i class="bi bi-arrow-up-right"></i>
+                    </div>
+
+                </a>
+
+
+                <!-- Company -->
+                <a href="{% url 'company' %}"
+                   class="dashboard-action-card">
+
+                    <div class="dashboard-action-icon">
+                        <i class="bi bi-building"></i>
+                    </div>
+
+                    <div>
+
+                        <h3>Company Profile</h3>
+
+                        <p>
+                            Manage your company information.
+                        </p>
+
+                    </div>
+
+                    <div class="dashboard-action-arrow">
+                        <i class="bi bi-arrow-up-right"></i>
+                    </div>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= HIRING PIPELINE ================= -->
+        <section class="dashboard-section">
+
+            <div class="dashboard-section-header">
+
+                <div>
+
+                    <span class="section-label">HIRING PROCESS</span>
+
+                    <h2>Hiring Pipeline</h2>
+
+                    <p>
+                        Track candidates as they move through the recruitment process.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="application-journey">
+
+                <div class="journey-step">
+
+                    <div class="journey-icon">
+                        <i class="bi bi-send"></i>
+                    </div>
+
+                    <h3>Applied</h3>
+
+                    <p>
+                        Candidates submit their applications.
+                    </p>
+
+                </div>
+
+
+                <div class="journey-line"></div>
+
+
+                <div class="journey-step">
+
+                    <div class="journey-icon">
+                        <i class="bi bi-star"></i>
+                    </div>
+
+                    <h3>Shortlisted</h3>
+
+                    <p>
+                        Review suitable candidates.
+                    </p>
+
+                </div>
+
+
+                <div class="journey-line"></div>
+
+
+                <div class="journey-step">
+
+                    <div class="journey-icon">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+
+                    <h3>Selected</h3>
+
+                    <p>
+                        Complete the hiring process.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= BOTTOM CTA ================= -->
+        <div class="dashboard-bottom-card">
+
+            <div class="dashboard-bottom-content">
+
+                <div class="dashboard-bottom-icon">
+                    <i class="bi bi-rocket-takeoff"></i>
+                </div>
+
+                <div>
+
+                    <h2>Ready to find your next great hire?</h2>
+
+                    <p>
+                        Post a new opportunity and connect with talented candidates.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <a href="{% url 'job_create' %}"
+               class="dashboard-primary-btn">
+
+                Post a Job
+                <i class="bi bi-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

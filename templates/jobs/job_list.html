@@ -1,0 +1,789 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Find Jobs | HireHub{% endblock %}
+
+{% block content %}
+
+<div class="jobs-page">
+
+    <!-- =====================================================
+         SEARCH HERO
+    ====================================================== -->
+
+    <section class="jobs-hero">
+
+        <div class="jobs-hero-content">
+
+            <span class="jobs-eyebrow">
+                <i class="bi bi-stars"></i>
+                EXPLORE OPPORTUNITIES
+            </span>
+
+            <h1>
+                Find your next
+                <span>opportunity.</span>
+            </h1>
+
+            <p>
+                Search jobs that match your skills, experience
+                and career goals.
+            </p>
+
+
+            <!-- SEARCH BAR -->
+
+            <form method="GET"
+                  action="{% url 'job_list' %}"
+                  class="jobs-search-box">
+
+                <div class="jobs-search-field">
+
+                    <i class="bi bi-search"></i>
+
+                    <input
+                        type="text"
+                        name="q"
+                        value="{{ request.GET.q|default:'' }}"
+                        placeholder="Job title, skills or keywords"
+                    >
+
+                </div>
+
+
+                <div class="jobs-search-divider"></div>
+
+
+                <div class="jobs-search-field location-field">
+
+                    <i class="bi bi-geo-alt"></i>
+
+                    <input
+                        type="text"
+                        name="location"
+                        value="{{ request.GET.location|default:'' }}"
+                        placeholder="Location"
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="jobs-search-button">
+
+                    Search Jobs
+
+                    <i class="bi bi-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+
+            <!-- POPULAR SEARCHES -->
+
+            <div class="popular-searches">
+
+                <span>Popular:</span>
+
+                <a href="?q=Python">Python</a>
+
+                <a href="?q=Django">Django</a>
+
+                <a href="?q=Java">Java</a>
+
+                <a href="?q=React">React</a>
+
+                <a href="?q=Data">Data</a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         JOB CONTENT
+    ====================================================== -->
+
+    <section class="jobs-content">
+
+        <div class="jobs-layout">
+
+
+            <!-- =================================================
+                 FILTER SIDEBAR
+            ================================================== -->
+
+            <aside class="jobs-filters">
+
+                <div class="filters-header">
+
+                    <div>
+                        <span class="filters-label">
+                            REFINE RESULTS
+                        </span>
+
+                        <h2>
+                            Filters
+                        </h2>
+                    </div>
+
+                    <a href="{% url 'job_list' %}"
+                       class="clear-filters">
+
+                        Clear
+
+                    </a>
+
+                </div>
+
+
+                <form method="GET"
+                      action="{% url 'job_list' %}"
+                      class="filter-form">
+
+
+                    <!-- Keep search keyword -->
+
+                    <input
+                        type="hidden"
+                        name="q"
+                        value="{{ request.GET.q|default:'' }}"
+                    >
+
+
+                    <!-- LOCATION -->
+
+                    <div class="filter-group">
+
+                        <label>
+                            Location
+                        </label>
+
+                        <div class="filter-input">
+
+                            <i class="bi bi-geo-alt"></i>
+
+                            <input
+                                type="text"
+                                name="location"
+                                value="{{ request.GET.location|default:'' }}"
+                                placeholder="e.g. Pune"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- JOB TYPE -->
+
+                    <div class="filter-group">
+
+                        <label>
+                            Job Type
+                        </label>
+
+                        <select name="job_type">
+
+                            <option value="">
+                                All Job Types
+                            </option>
+
+                            <option value="full_time"
+                                {% if request.GET.job_type == 'full_time' %}
+                                    selected
+                                {% endif %}>
+                                Full Time
+                            </option>
+
+                            <option value="part_time"
+                                {% if request.GET.job_type == 'part_time' %}
+                                    selected
+                                {% endif %}>
+                                Part Time
+                            </option>
+
+                            <option value="internship"
+                                {% if request.GET.job_type == 'internship' %}
+                                    selected
+                                {% endif %}>
+                                Internship
+                            </option>
+
+                            <option value="contract"
+                                {% if request.GET.job_type == 'contract' %}
+                                    selected
+                                {% endif %}>
+                                Contract
+                            </option>
+
+                            <option value="remote"
+                                {% if request.GET.job_type == 'remote' %}
+                                    selected
+                                {% endif %}>
+                                Remote
+                            </option>
+
+                            <option value="hybrid"
+                                {% if request.GET.job_type == 'hybrid' %}
+                                    selected
+                                {% endif %}>
+                                Hybrid
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- EXPERIENCE -->
+
+                    <div class="filter-group">
+
+                        <label>
+                            Experience
+                        </label>
+
+                        <select name="experience">
+
+                            <option value="">
+                                Any Experience
+                            </option>
+
+                            <option value="0"
+                                {% if request.GET.experience == '0' %}
+                                    selected
+                                {% endif %}>
+                                Fresher
+                            </option>
+
+                            <option value="1"
+                                {% if request.GET.experience == '1' %}
+                                    selected
+                                {% endif %}>
+                                1+ Years
+                            </option>
+
+                            <option value="2"
+                                {% if request.GET.experience == '2' %}
+                                    selected
+                                {% endif %}>
+                                2+ Years
+                            </option>
+
+                            <option value="3"
+                                {% if request.GET.experience == '3' %}
+                                    selected
+                                {% endif %}>
+                                3+ Years
+                            </option>
+
+                            <option value="5"
+                                {% if request.GET.experience == '5' %}
+                                    selected
+                                {% endif %}>
+                                5+ Years
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- CATEGORY -->
+
+                    <div class="filter-group">
+
+                        <label>
+                            Category
+                        </label>
+
+                        <select name="category">
+
+                            <option value="">
+                                All Categories
+                            </option>
+
+                            {% for category in categories %}
+
+                                <option
+                                    value="{{ category.id }}"
+                                    {% if request.GET.category == category.id|stringformat:"s" %}
+                                        selected
+                                    {% endif %}
+                                >
+
+                                    {{ category.name }}
+
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- SALARY -->
+
+                    <div class="filter-group">
+
+                        <label>
+                            Salary Range
+                        </label>
+
+                        <div class="salary-fields">
+
+                            <input
+                                type="number"
+                                name="salary_min"
+                                value="{{ request.GET.salary_min|default:'' }}"
+                                placeholder="Min"
+                                min="0"
+                            >
+
+                            <span>—</span>
+
+                            <input
+                                type="number"
+                                name="salary_max"
+                                value="{{ request.GET.salary_max|default:'' }}"
+                                placeholder="Max"
+                                min="0"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SORT -->
+
+                    <div class="filter-group">
+
+                        <label>
+                            Sort By
+                        </label>
+
+                        <select name="sort">
+
+                            <option value="">
+                                Latest Jobs
+                            </option>
+
+                            <option value="oldest"
+                                {% if request.GET.sort == 'oldest' %}
+                                    selected
+                                {% endif %}>
+                                Oldest Jobs
+                            </option>
+
+                            <option value="salary_high"
+                                {% if request.GET.sort == 'salary_high' %}
+                                    selected
+                                {% endif %}>
+                                Highest Salary
+                            </option>
+
+                            <option value="salary_low"
+                                {% if request.GET.sort == 'salary_low' %}
+                                    selected
+                                {% endif %}>
+                                Lowest Salary
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="apply-filters-btn">
+
+                        <i class="bi bi-sliders"></i>
+
+                        Apply Filters
+
+                    </button>
+
+                </form>
+
+            </aside>
+
+
+            <!-- =================================================
+                 JOB RESULTS
+            ================================================== -->
+
+            <div class="jobs-results">
+
+
+                <!-- RESULTS HEADER -->
+
+                <div class="jobs-results-header">
+
+                    <div>
+
+                        <span class="results-eyebrow">
+                            HIREHUB OPPORTUNITIES
+                        </span>
+
+                        <h2>
+                            Available Jobs
+                        </h2>
+
+                    </div>
+
+
+                    {% if page_obj %}
+
+                        <span class="jobs-count">
+
+                            {{ page_obj.paginator.count }}
+                            jobs found
+
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- ACTIVE FILTERS -->
+
+                {% if request.GET.q or request.GET.location or request.GET.job_type or request.GET.category or request.GET.experience or request.GET.salary_min or request.GET.salary_max %}
+
+                    <div class="active-filters">
+
+                        <span>
+                            Active filters:
+                        </span>
+
+                        {% if request.GET.q %}
+                            <span class="active-filter">
+                                {{ request.GET.q }}
+                            </span>
+                        {% endif %}
+
+                        {% if request.GET.location %}
+                            <span class="active-filter">
+                                {{ request.GET.location }}
+                            </span>
+                        {% endif %}
+
+                        {% if request.GET.job_type %}
+                            <span class="active-filter">
+                                {{ request.GET.job_type|title }}
+                            </span>
+                        {% endif %}
+
+                        {% if request.GET.category %}
+                            <span class="active-filter">
+                                Category
+                            </span>
+                        {% endif %}
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- JOB LIST -->
+
+                {% if jobs %}
+
+                    <div class="jobs-list">
+
+                        {% for job in jobs %}
+
+                            <article class="job-card">
+
+
+                                <!-- COMPANY LOGO -->
+
+                                <div class="job-company-logo">
+
+                                    {% if job.company.logo %}
+
+                                        <img
+                                            src="{{ job.company.logo.url }}"
+                                            alt="{{ job.company.company_name }}"
+                                        >
+
+                                    {% else %}
+
+                                        <div class="job-logo-placeholder">
+
+                                            <i class="bi bi-building"></i>
+
+                                        </div>
+
+                                    {% endif %}
+
+                                </div>
+
+
+                                <!-- JOB INFORMATION -->
+
+                                <div class="job-card-main">
+
+
+                                    <div class="job-card-top">
+
+                                        <div>
+
+                                            <a
+                                                href="{% url 'job_detail' job.id %}"
+                                                class="job-title"
+                                            >
+
+                                                {{ job.title }}
+
+                                            </a>
+
+                                            <p class="job-company">
+
+                                                {{ job.company.company_name }}
+
+                                            </p>
+
+                                        </div>
+
+
+                                        {% if job.is_active %}
+
+                                            <span class="job-status">
+
+                                                <span></span>
+
+                                                Active
+
+                                            </span>
+
+                                        {% endif %}
+
+                                    </div>
+
+
+                                    <!-- JOB META -->
+
+                                    <div class="job-meta">
+
+                                        <span>
+
+                                            <i class="bi bi-geo-alt"></i>
+
+                                            {{ job.location }}
+
+                                        </span>
+
+
+                                        <span>
+
+                                            <i class="bi bi-briefcase"></i>
+
+                                            {{ job.get_job_type_display }}
+
+                                        </span>
+
+
+                                        <span>
+
+                                            <i class="bi bi-clock"></i>
+
+                                            {{ job.experience }}+
+                                            {% if job.experience == 1 %}
+                                                year
+                                            {% else %}
+                                                years
+                                            {% endif %}
+
+                                        </span>
+
+                                    </div>
+
+
+                                    <!-- SKILLS -->
+
+                                    <div class="job-skills">
+
+                                        {% for skill in job.skills.split %}
+
+                                            {% if forloop.counter <= 4 %}
+
+                                                <span>
+                                                    {{ skill }}
+                                                </span>
+
+                                            {% endif %}
+
+                                        {% endfor %}
+
+                                    </div>
+
+
+                                    <!-- FOOTER -->
+
+                                    <div class="job-card-footer">
+
+
+                                        <div class="job-salary">
+
+                                            <i class="bi bi-currency-rupee"></i>
+
+                                            {% if job.salary_min and job.salary_max %}
+
+                                                {{ job.salary_min }}
+                                                -
+                                                {{ job.salary_max }}
+
+                                            {% elif job.salary_min %}
+
+                                                {{ job.salary_min }}+
+
+                                            {% elif job.salary_max %}
+
+                                                Up to {{ job.salary_max }}
+
+                                            {% else %}
+
+                                                Salary not disclosed
+
+                                            {% endif %}
+
+                                        </div>
+
+
+                                        <span class="job-deadline">
+
+                                            <i class="bi bi-calendar3"></i>
+
+                                            Apply by
+                                            {{ job.deadline|date:"d M Y" }}
+
+                                        </span>
+
+
+                                        <a
+                                            href="{% url 'job_detail' job.id %}"
+                                            class="view-job-btn"
+                                        >
+
+                                            View Job
+
+                                            <i class="bi bi-arrow-right"></i>
+
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            </article>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <!-- =================================================
+                         PAGINATION
+                    ================================================== -->
+
+                    {% if page_obj.has_other_pages %}
+
+                        <div class="jobs-pagination">
+
+
+                            {% if page_obj.has_previous %}
+
+                                <a
+                                    href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}{% if request.GET.location %}&location={{ request.GET.location|urlencode }}{% endif %}{% if request.GET.job_type %}&job_type={{ request.GET.job_type|urlencode }}{% endif %}{% if request.GET.experience %}&experience={{ request.GET.experience|urlencode }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category|urlencode }}{% endif %}{% if request.GET.salary_min %}&salary_min={{ request.GET.salary_min|urlencode }}{% endif %}{% if request.GET.salary_max %}&salary_max={{ request.GET.salary_max|urlencode }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort|urlencode }}{% endif %}"
+                                    class="pagination-arrow"
+                                >
+
+                                    <i class="bi bi-arrow-left"></i>
+
+                                </a>
+
+                            {% endif %}
+
+
+                            <span class="pagination-current">
+
+                                Page {{ page_obj.number }}
+                                of
+                                {{ page_obj.paginator.num_pages }}
+
+                            </span>
+
+
+                            {% if page_obj.has_next %}
+
+                                <a
+                                    href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}{% if request.GET.location %}&location={{ request.GET.location|urlencode }}{% endif %}{% if request.GET.job_type %}&job_type={{ request.GET.job_type|urlencode }}{% endif %}{% if request.GET.experience %}&experience={{ request.GET.experience|urlencode }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category|urlencode }}{% endif %}{% if request.GET.salary_min %}&salary_min={{ request.GET.salary_min|urlencode }}{% endif %}{% if request.GET.salary_max %}&salary_max={{ request.GET.salary_max|urlencode }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort|urlencode }}{% endif %}"
+                                    class="pagination-arrow"
+                                >
+
+                                    <i class="bi bi-arrow-right"></i>
+
+                                </a>
+
+                            {% endif %}
+
+                        </div>
+
+                    {% endif %}
+
+
+                {% else %}
+
+
+                    <!-- =================================================
+                         EMPTY STATE
+                    ================================================== -->
+
+                    <div class="jobs-empty">
+
+                        <div class="empty-icon">
+
+                            <i class="bi bi-search"></i>
+
+                        </div>
+
+                        <h3>
+                            No jobs found
+                        </h3>
+
+                        <p>
+                            Try changing your search or filters
+                            to find more opportunities.
+                        </p>
+
+                        <a
+                            href="{% url 'job_list' %}"
+                            class="clear-results-btn"
+                        >
+
+                            Clear Search
+
+                        </a>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}

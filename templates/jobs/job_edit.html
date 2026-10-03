@@ -1,0 +1,565 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Edit Job | HireHub
+{% endblock %}
+
+{% block content %}
+
+<section class="job-form-page">
+
+    <div class="container">
+
+        <!-- BACK -->
+
+        <div class="job-form-back">
+
+            <a href="{% url 'job_detail' job.id %}">
+                <i class="bi bi-arrow-left"></i>
+                Back to Job
+            </a>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <!-- ================= MAIN FORM ================= -->
+
+            <div class="col-lg-8">
+
+                <div class="job-form-card">
+
+                    <div class="job-form-heading">
+
+                        <span class="section-label">
+                            RECRUITER PANEL
+                        </span>
+
+                        <h1>
+                            Edit your
+                            <span class="gradient-text">opportunity.</span>
+                        </h1>
+
+                        <p>
+                            Update the job information and keep
+                            candidates informed with the latest details.
+                        </p>
+
+                    </div>
+
+
+                    <form
+                        method="POST"
+                        class="job-create-form"
+                    >
+
+                        {% csrf_token %}
+
+
+                        <!-- ================= JOB INFORMATION ================= -->
+
+                        <div class="job-form-section">
+
+                            <div class="job-form-section-title">
+
+                                <div class="job-form-section-icon">
+                                    <i class="bi bi-briefcase"></i>
+                                </div>
+
+                                <div>
+                                    <h2>Job Information</h2>
+
+                                    <p>
+                                        Update the basic details of this position.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row g-3">
+
+                                <!-- CATEGORY -->
+
+                                <div class="col-md-6">
+
+                                    <div class="job-form-field">
+
+                                        <label for="{{ form.category.id_for_label }}">
+                                            Category
+                                        </label>
+
+                                        {{ form.category }}
+
+                                        {% if form.category.errors %}
+                                            <div class="job-form-error">
+                                                {{ form.category.errors|striptags }}
+                                            </div>
+                                        {% endif %}
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- JOB TYPE -->
+
+                                <div class="col-md-6">
+
+                                    <div class="job-form-field">
+
+                                        <label for="{{ form.job_type.id_for_label }}">
+                                            Job Type
+                                            <span>*</span>
+                                        </label>
+
+                                        {{ form.job_type }}
+
+                                        {% if form.job_type.errors %}
+                                            <div class="job-form-error">
+                                                {{ form.job_type.errors|striptags }}
+                                            </div>
+                                        {% endif %}
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- TITLE -->
+
+                                <div class="col-12">
+
+                                    <div class="job-form-field">
+
+                                        <label for="{{ form.title.id_for_label }}">
+                                            Job Title
+                                            <span>*</span>
+                                        </label>
+
+                                        {{ form.title }}
+
+                                        {% if form.title.errors %}
+                                            <div class="job-form-error">
+                                                {{ form.title.errors|striptags }}
+                                            </div>
+                                        {% endif %}
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- LOCATION -->
+
+                                <div class="col-md-6">
+
+                                    <div class="job-form-field">
+
+                                        <label for="{{ form.location.id_for_label }}">
+                                            Location
+                                            <span>*</span>
+                                        </label>
+
+                                        {{ form.location }}
+
+                                        {% if form.location.errors %}
+                                            <div class="job-form-error">
+                                                {{ form.location.errors|striptags }}
+                                            </div>
+                                        {% endif %}
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- EXPERIENCE -->
+
+                                <div class="col-md-6">
+
+                                    <div class="job-form-field">
+
+                                        <label for="{{ form.experience.id_for_label }}">
+                                            Experience
+                                            <span>*</span>
+                                        </label>
+
+                                        <div class="input-with-suffix">
+
+                                            {{ form.experience }}
+
+                                            <span>
+                                                years
+                                            </span>
+
+                                        </div>
+
+                                        {% if form.experience.errors %}
+                                            <div class="job-form-error">
+                                                {{ form.experience.errors|striptags }}
+                                            </div>
+                                        {% endif %}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= DESCRIPTION ================= -->
+
+                        <div class="job-form-section">
+
+                            <div class="job-form-section-title">
+
+                                <div class="job-form-section-icon">
+                                    <i class="bi bi-file-text"></i>
+                                </div>
+
+                                <div>
+                                    <h2>Job Description</h2>
+
+                                    <p>
+                                        Update the responsibilities and role details.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="job-form-field">
+
+                                <label for="{{ form.description.id_for_label }}">
+                                    Description
+                                    <span>*</span>
+                                </label>
+
+                                {{ form.description }}
+
+                                {% if form.description.errors %}
+                                    <div class="job-form-error">
+                                        {{ form.description.errors|striptags }}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= COMPENSATION ================= -->
+
+                        <div class="job-form-section">
+
+                            <div class="job-form-section-title">
+
+                                <div class="job-form-section-icon">
+                                    <i class="bi bi-cash-stack"></i>
+                                </div>
+
+                                <div>
+                                    <h2>Compensation</h2>
+
+                                    <p>
+                                        Update the salary range for this position.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row g-3">
+
+                                <div class="col-md-6">
+
+                                    <div class="job-form-field">
+
+                                        <label for="{{ form.salary_min.id_for_label }}">
+                                            Minimum Salary
+                                        </label>
+
+                                        <div class="salary-input">
+
+                                            <span>₹</span>
+
+                                            {{ form.salary_min }}
+
+                                        </div>
+
+                                        {% if form.salary_min.errors %}
+                                            <div class="job-form-error">
+                                                {{ form.salary_min.errors|striptags }}
+                                            </div>
+                                        {% endif %}
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <div class="job-form-field">
+
+                                        <label for="{{ form.salary_max.id_for_label }}">
+                                            Maximum Salary
+                                        </label>
+
+                                        <div class="salary-input">
+
+                                            <span>₹</span>
+
+                                            {{ form.salary_max }}
+
+                                        </div>
+
+                                        {% if form.salary_max.errors %}
+                                            <div class="job-form-error">
+                                                {{ form.salary_max.errors|striptags }}
+                                            </div>
+                                        {% endif %}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= SKILLS ================= -->
+
+                        <div class="job-form-section">
+
+                            <div class="job-form-section-title">
+
+                                <div class="job-form-section-icon">
+                                    <i class="bi bi-stars"></i>
+                                </div>
+
+                                <div>
+                                    <h2>Skills & Requirements</h2>
+
+                                    <p>
+                                        Update the skills required for this role.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="job-form-field">
+
+                                <label for="{{ form.skills.id_for_label }}">
+                                    Required Skills
+                                    <span>*</span>
+                                </label>
+
+                                {{ form.skills }}
+
+                                <small class="job-form-help">
+                                    Example: Python Django SQL REST API
+                                </small>
+
+                                {% if form.skills.errors %}
+                                    <div class="job-form-error">
+                                        {{ form.skills.errors|striptags }}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= DEADLINE ================= -->
+
+                        <div class="job-form-section">
+
+                            <div class="job-form-section-title">
+
+                                <div class="job-form-section-icon">
+                                    <i class="bi bi-calendar-event"></i>
+                                </div>
+
+                                <div>
+                                    <h2>Application Deadline</h2>
+
+                                    <p>
+                                        Update the final date for applications.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="job-form-field">
+
+                                <label for="{{ form.deadline.id_for_label }}">
+                                    Deadline
+                                    <span>*</span>
+                                </label>
+
+                                {{ form.deadline }}
+
+                                {% if form.deadline.errors %}
+                                    <div class="job-form-error">
+                                        {{ form.deadline.errors|striptags }}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= PUBLISHING ================= -->
+
+                        <div class="job-form-section">
+
+                            <div class="job-form-section-title">
+
+                                <div class="job-form-section-icon">
+                                    <i class="bi bi-toggle-on"></i>
+                                </div>
+
+                                <div>
+                                    <h2>Publishing</h2>
+
+                                    <p>
+                                        Control whether candidates can currently
+                                        see this job.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="job-active-field">
+
+                                {{ form.is_active }}
+
+                                <div>
+
+                                    <strong>
+                                        Keep this job active
+                                    </strong>
+
+                                    <span>
+                                        Active jobs are visible to candidates
+                                        and can receive applications.
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= ACTIONS ================= -->
+
+                        <div class="job-form-actions">
+
+                            <a
+                                href="{% url 'job_detail' job.id %}"
+                                class="job-cancel-btn"
+                            >
+                                Cancel
+                            </a>
+
+                            <button
+                                type="submit"
+                                class="job-submit-btn"
+                            >
+                                Save Changes
+                                <i class="bi bi-check2"></i>
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= SIDEBAR ================= -->
+
+            <div class="col-lg-4">
+
+                <aside class="job-form-sidebar">
+
+                    <div class="job-posting-tips">
+
+                        <div class="posting-tips-icon">
+                            <i class="bi bi-pencil-square"></i>
+                        </div>
+
+                        <span>
+                            KEEP IT UPDATED
+                        </span>
+
+                        <h3>
+                            Clear job information
+                            attracts better matches.
+                        </h3>
+
+                        <ul>
+
+                            <li>
+                                Keep responsibilities accurate.
+                            </li>
+
+                            <li>
+                                Update skills when requirements change.
+                            </li>
+
+                            <li>
+                                Keep salary information realistic.
+                            </li>
+
+                            <li>
+                                Extend the deadline when necessary.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <div class="job-posting-flow">
+
+                        <span>
+                            HIREHUB
+                        </span>
+
+                        <h3>
+                            Small updates can make
+                            your opportunity clearer.
+                        </h3>
+
+                        <div class="posting-flow-icon">
+                            <i class="bi bi-arrow-repeat"></i>
+                        </div>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
